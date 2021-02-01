@@ -1,9 +1,18 @@
 <script>
-    import PlainButton from "../button/PlainButton.svelte";
-    import PrimaryButton from "../button/PrimaryButton.svelte";
+    import Pagination from "./Pagination.svelte";
 </script>
 
 <div class="container">
+    <div class="header">
+        <select>
+            <option>10</option>
+            <option>20</option>
+            <option>30</option>
+            <option>50</option>
+            <option>100</option>
+        </select>
+        条记录每页
+    </div>
     <table class="dt">
         <thead class="dt-h">
             <tr>
@@ -69,14 +78,22 @@
 
         </tfoot>
     </table>
-    <PlainButton title="adsffads" />
-    <PrimaryButton title="Primary" />
+    <Pagination page={1} total={100} />
 </div>
 
 <style>
     .container {
         background: white;
-        padding: 20px;
+    }
+
+    .header {
+        margin: 6px 0;
+         font-size: 12px;
+    }
+
+    .header > select {
+        height: 21px;
+        padding: 0;
     }
 
     .dt {

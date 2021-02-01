@@ -2,7 +2,6 @@
 	import Menu from "./ui/widget/menu/Menu.svelte"
 	import DataTable from "./ui/widget/table/DataTable.svelte"
 
-	let src =  "img/1.jpg"
 	let iconFont = "font/iconfont.css"
 </script>
 <div>
@@ -21,11 +20,17 @@
 			</div>
 		</header>
 		<main>
+			<div class="breadcrumb">
+				<div>系统</div>
+				<div class="sp">/</div>
+				<div>库存管理</div>
+				<div class="sp">/</div>
+				<div>编辑</div>
+			</div>
 			<div class="body">
 				<DataTable />
 			</div>
 			<div class="footer">
-
 			</div>
 		</main>
 	</div>
@@ -74,7 +79,6 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0 32px;
 	}
 
 	.avatar {
@@ -98,5 +102,13 @@
 	}
 	main > .body {
 		margin: 16px;
+	}
+	.breadcrumb {
+		display: flex;
+		font-size: 12px;
+		margin: 16px;
+	}
+	.breadcrumb .sp {
+		margin: 0 5px;
 	}
 </style>
