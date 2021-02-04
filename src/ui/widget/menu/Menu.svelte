@@ -118,7 +118,30 @@
 <style>
     .container {
         height: calc(100vh - 53px);
-        border-right: 1px solid #d6d9dc;
+        position: sticky;
+        top: 53px;
+        overflow-y: auto;
+    }
+
+    .container::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        background-color: transparent;
+    }
+
+    .container::-webkit-scrollbar-corner {
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+    .container::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: rgba(0,0,0,0.2);
+    }
+
+    .container::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: transparent;
     }
 
     ul {

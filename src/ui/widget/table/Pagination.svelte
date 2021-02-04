@@ -1,6 +1,9 @@
 <script>
-    export let total = 3
+    import {beforeUpdate} from "svelte";
+
+    export let total = 1
     export let page = 1
+
     let jumpToPage = total
     $: model = (() => {
         let model = {
@@ -25,7 +28,6 @@
                 end = total
             }
         }
-
         if (start > 3) {
             model.moreBefore = true
         }
@@ -39,10 +41,13 @@
         return model
     })()
 
+    beforeUpdate(() => {
+        console.log(total)
+    })
 
     function gotoPage(index) {
         if (index === model.page || index < 1 || index > model.total) {
-            // do nothing
+            // ignore the invalid operation
         } else {
             page = index
         }
@@ -106,7 +111,7 @@
     }
 
     .pg > .prev {
-        margin-right: 5px;
+        margin-right: 6px;
     }
     .pg > .next {
         margin-left: 5px;
