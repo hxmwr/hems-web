@@ -1,38 +1,10 @@
 <script>
     import Menu from "./ui/widget/menu/Menu.svelte"
-    import DataTable from "./ui/widget/table/DataTable.svelte"
+    import User from "./ui/crud/user/User.svelte";
 
     let iconFont = "font/iconfont.css"
 
-    let dataTableOptions = {
-        ajax: 'http://47.105.46.129:3000/mock/11/api/users',
-        columns: [
-            {
-                title: "Name",
-                data: "name"
-            },
-            {
-                title: "Age",
-                data: "age"
-            },
-            {
-                title: "Sex",
-                data: "sex"
-            },
-            {
-                title: "Address",
-                data: "address"
-            },
-            {
-                title: "Email",
-                data: "email"
-            },
-            {
-                title: "Phone",
-                data: "phone"
-            }
-        ]
-    }
+
 </script>
 <div>
     <div class="top-bar">
@@ -54,7 +26,7 @@
         </header>
         <main>
             <div class="body" style="height: 3000px;">
-                <DataTable options={dataTableOptions}/>
+                <User />
             </div>
             <div class="footer">
             </div>

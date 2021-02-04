@@ -1,16 +1,24 @@
 <script>
     import Pagination from "./Pagination.svelte";
-    import PrimaryButton from "../button/PrimaryButton.svelte";
+    import RingLoader from "../spinner/RingLoader.svelte";
 
     export let options
+    export let title = "数据表"
+    export let OpGroup
 
     let data = []
     let limit = "1"
     let page = 1
     let total = 1
     let loading = true
+    let showLoader = false
+    let timer = null
 
     async function load(url) {
+        if (timer) clearTimeout(timer)
+        setTimeout(() => {
+            if (loading) showLoader = true
+        }, 100)
         loading = true
         const res = await fetch(url)
         const json = await res.json()
@@ -20,6 +28,7 @@
             page = 1
         }
         loading = false
+        showLoader = false
         if (res.ok) {
             return json
         } else {
@@ -32,7 +41,10 @@
 
 <div class="container">
     <div class="top-bar">
-        <span>数据表</span>
+        <div class="title">{title}</div>
+        <div class="op-group">
+            <OpGroup />
+        </div>
     </div>
     <div class="menu-bar">
         <div class="pg-size">
@@ -45,9 +57,6 @@
                 <option value="5">100</option>
             </select>
             条记录
-        </div>
-        <div class="group-actions">
-            <PrimaryButton title="新增记录" />
         </div>
     </div>
     <div class="dt-wrapper">
@@ -82,6 +91,13 @@
     </div>
     {#if data.length > 0}
         <Pagination bind:page={page} total={total}/>
+    {/if}
+    {#if showLoader}
+        <div class="mask">
+            <div class="loader">
+                <RingLoader/>
+            </div>
+        </div>
     {/if}
 </div>
 
@@ -162,13 +178,36 @@
     }
 
     .top-bar {
-        margin: 16px 0;
+        margin: 19px 0 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .top-bar > .title {
         font-size: 28px;
+    }
+
+    .top-bar > .op-group {
+        font-size: 14px;
     }
 
     .menu-bar {
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+    .mask {
+        top: 0;
+        z-index: 999;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,255,255,0.7);
+    }
+    .loader {
+        position: fixed;
+        border-radius: 8px;
+        margin-left: -12px;
+        margin-top: -12px;
     }
 </style>
