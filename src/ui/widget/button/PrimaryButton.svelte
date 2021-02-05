@@ -1,9 +1,8 @@
 <script>
-    export let title
 </script>
 
 <button>
-    {title}
+    <slot/>
 </button>
 
 <style>

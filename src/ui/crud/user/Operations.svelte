@@ -2,5 +2,5 @@
     import PrimaryButton from "../../widget/button/PrimaryButton.svelte";
 </script>
 <div>
-    <PrimaryButton title="新增记录" />
+    <PrimaryButton>新增记录</PrimaryButton>
 </div>

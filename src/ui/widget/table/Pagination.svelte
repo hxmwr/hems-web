@@ -1,6 +1,4 @@
 <script>
-    import {beforeUpdate} from "svelte";
-
     export let total = 1
     export let page = 1
 
@@ -41,13 +39,9 @@
         return model
     })()
 
-    beforeUpdate(() => {
-        console.log(total)
-    })
-
     function gotoPage(index) {
         if (index === model.page || index < 1 || index > model.total) {
-            // ignore the invalid operation
+            // ignore invalid operation
         } else {
             page = index
         }

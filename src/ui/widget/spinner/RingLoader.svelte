@@ -1,5 +1,4 @@
 <div data-test="ring-loader-inline" class="ring-loader">
-
 </div>
 
 <style>

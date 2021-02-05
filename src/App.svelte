@@ -1,11 +1,13 @@
 <script>
     import Menu from "./ui/widget/menu/Menu.svelte"
     import User from "./ui/crud/user/User.svelte";
+    import {Route, Router} from "./lib/routing"
 
     let iconFont = "font/iconfont.css"
 
 
 </script>
+<Router url="">
 <div>
     <div class="top-bar">
         <div class="logo">
@@ -26,13 +28,16 @@
         </header>
         <main>
             <div class="body" style="height: 3000px;">
-                <User />
+                    <Route path="/" component={User} />
+                    <Route path="/user" component={User} />
             </div>
             <div class="footer">
             </div>
         </main>
     </div>
 </div>
+</Router>
+
 
 <svelte:head>
     <link rel="stylesheet" href={iconFont}>
@@ -41,7 +46,7 @@
 <style>
     .container {
         display: grid;
-        grid-template-columns: 200px 1fr;
+        grid-template-columns: 180px 1fr;
         grid-template-rows: 50px 1fr;
         height: 100vh;
         transition: all .2s;
@@ -60,7 +65,7 @@
     }
 
     .logo {
-        width: 200px;
+        width: 180px;
         display: flex;
         align-items: center;
         padding-left: 44px;

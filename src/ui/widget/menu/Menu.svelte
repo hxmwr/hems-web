@@ -1,118 +1,133 @@
 <script>
-    let menu = [
+    import {Link} from "../../../lib/routing"
+
+    let menus = [
         {
-            section: "",
-            menuItems: [
+            name: "",
+            items: [
                 {
-                    title: '',
-                    url: '',
-                    icon: '',
-                    subMenuItems: [
+                    key: 1,
+                    title: '指标看板',
+                    path: '/',
+                    icon: 'icon-biaoqianguanli',
+                    isExpanded: false,
+                    children: []
+                },
+                {
+                    key: 2,
+                    title: '用电分析',
+                    icon: 'icon-bociguanli',
+                    isExpanded: false,
+                    children: [
                         {
-                            title: '',
-                            url: ''
+                            key: 101,
+                            title: 'Home',
+                            path: ''
+                        },
+                        {
+                            key: 102,
+                            title: 'User',
+                            path: 'user'
+                        },
+                        {
+                            key: 103,
+                            title: '菜单3',
+                            path: ''
+                        },
+                        {
+                            key: 104,
+                            title: '菜单4',
+                            path: ''
                         }
                     ]
-                }
-            ]
-        },
-        {
-            section: "",
-            menuItems: [
+                },
                 {
-                    title: '',
-                    url: '',
-                    icon: '',
-                    subMenuItems: [
-                        {
-                            title: '',
-                            url: ''
-                        }
-                    ]
+                    key: 3,
+                    title: '实时监控',
+                    path: '/',
+                    icon: 'icon-chukuguanli',
+                    isExpanded: false,
+                    children: []
+                },
+                {
+                    key: 4,
+                    title: '能耗报警',
+                    path: '/',
+                    icon: 'icon-renwuguanli',
+                    isExpanded: false,
+                    children: []
+                },
+                {
+                    key: 5,
+                    title: '成本管理',
+                    path: '/',
+                    icon: 'icon-jichuguanli',
+                    isExpanded: false,
+                    children: []
+                },
+                {
+                    key: 6,
+                    title: '环境与排放监测',
+                    path: '/',
+                    icon: 'icon-kucunguanli',
+                    isExpanded: false,
+                    children: []
+                },
+                {
+                    key: 7,
+                    title: '系统设置',
+                    path: '/',
+                    icon: 'icon-xitongguanli',
+                    isExpanded: false,
+                    children: []
                 }
             ]
         }
     ]
+    let activeItemKey = 1
 
-    let isExpanded = true
+    function handleClickMenuItem(event, key) {
+        activeItemKey = key
+    }
 </script>
 
 <div class="container">
-    <ul>
-        <li>
-        <div class="mi">
-                <span class="iconfont icon-biaoqianguanli mi-i">
-                    <span class="mi-t">标签管理</span>
-                </span>
-            <span class="iconfont icon-xiala mi-ei"></span></div>
-    </li>
-        <li>
-            <div class="mi" on:click={e => isExpanded = !isExpanded}>
-                <span class="iconfont icon-bociguanli mi-i">
-                    <span class="mi-t">波次管理</span>
-                </span>
-                <span class="iconfont icon-xiala mi-ei" class:expanded={isExpanded}></span>
-            </div>
-            <div class="sm" class:expanded={isExpanded}>
-                <div class="smi">
-                    <span>波次管理1</span>
-                </div>
-                <div class="smi active">
-                    <span>波次管理2</span>
-                </div>
-                <div class="smi">
-                    <span>波次管理3</span>
-                </div>
-                <div class="smi">
-                    <span>波次管理4</span>
-                </div>
-                <div class="smi">
-                    <span>波次管理5</span>
-                </div>
-            </div>
-
-        </li>
-        <li>
-            <div class="mi">
-                <span class="iconfont icon-chukuguanli mi-i">
-                <span class="mi-t">出库管理</span>
-            </span>
-                <span class="iconfont icon-xiala mi-ei"></span>
-            </div>
-        </li>
-        <li>
-            <div class="mi">
-                <span class="iconfont icon-kucunguanli mi-i">
-                <span class="mi-t">库存管理</span>
-            </span>
-                <span class="iconfont icon-xiala mi-ei"></span>
-            </div>
-        </li>
-        <li>
-            <div class="mi">
-                <span class="iconfont icon-renwuguanli mi-i">
-                <span class="mi-t">任务管理</span>
-            </span>
-                <span class="iconfont icon-xiala mi-ei"></span>
-            </div>
-        </li>
-        <li>
-            <div class="mi">
-                <span class="iconfont icon-jichuguanli mi-i">
-                <span class="mi-t">基础管理</span>
-            </span>
-                <span class="iconfont icon-xiala mi-ei"></span>
-            </div>
-        </li>
-        <li>
-            <div class="mi">
-                <span class="iconfont icon-xitongguanli mi-i">
-                <span class="mi-t">系统管理</span>
-            </span>
-                <span class="iconfont icon-xiala mi-ei"></span>
-            </div>
-        </li>
-    </ul>
+    {#each menus as menu}
+        <div>{menu.name}</div>
+        <ul>
+            {#each menu.items as item}
+                {#if item.path && item.path !== '' && !(item.children && item.children.length > 0)}
+                    <div class="mi" class:active={item.key === activeItemKey}>
+                        <Link to={item.path} on:click={e => {handleClickMenuItem(e, item.key)}}>
+                            <span class={"iconfont mi-i " + item.icon}>
+                                <span class="mi-t">{item.title}</span>
+                            </span>
+                        </Link>
+                    </div>
+                {:else}
+                    <div class="mi has-children" class:expanded={item.isExpanded}
+                         on:click={() => {item.isExpanded = !item.isExpanded}}>
+                            <span class={"iconfont mi-i " + item.icon}>
+                                <span class="mi-t">{item.title}</span>
+                            </span>
+                        {#if !item.isExpanded}
+                            <span class="iconfont icon-xiala mi-ei" class:expanded={item.isExpanded}></span>
+                        {/if}
+                    </div>
+                    {#if item.children && item.children.length > 0}
+                        <div class="sm" class:expanded={item.isExpanded}>
+                            {#each item.children as child}
+                                <div class="smi" class:active={activeItemKey === child.key}>
+                                    <Link to={child.path}
+                                          on:click={e => {handleClickMenuItem(e, child.key)}}>{child.title}</Link>
+                                </div>
+                            {/each}
+                        </div>
+                    {/if}
+                {/if}
+            {/each}
+        </ul>
+    {/each}
 </div>
 
 <style>
@@ -136,7 +151,7 @@
 
     .container::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background-color: rgba(0,0,0,0.2);
+        background-color: rgba(0, 0, 0, 0.2);
     }
 
     .container::-webkit-scrollbar-track {
@@ -152,12 +167,18 @@
     }
 
     .mi {
+        position: relative;
         display: flex;
         align-items: center;
-        padding: 10px 16px;
         justify-content: space-between;
         cursor: pointer;
         color: #535a60;
+        font-size: 13px;
+        padding: 10px 10px 10px 16px;
+    }
+
+    .mi.expanded {
+        padding-bottom: 6px;
     }
 
     .mi:hover {
@@ -196,22 +217,36 @@
     }
 
     .smi {
+        position: relative;
         cursor: pointer;
         padding-left: 52px;
         padding-top: 10px;
         padding-bottom: 10px;
-        font-size: 14px;
+        font-size: 13px;
         color: #535a60;
+        border-bottom-left-radius: 2px;
+        border-top-left-radius: 2px;
     }
 
     .smi:hover {
         color: #0c0d0e;
     }
 
+    .mi.active,
     .smi.active {
         border-right: 3px solid #1bbc9c;
         background: #f4f4f4;
         font-weight: bold;
         color: #0c0d0e;
+    }
+
+    .mi.active .mi-i,
+    .smi.active .mi-i {
+        font-weight: normal;
+    }
+
+    .mi.active .mi-i > .mi-t,
+    .smi.active .mi-i > .mi-t {
+        font-weight: bold;
     }
 </style>

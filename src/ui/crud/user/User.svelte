@@ -1,6 +1,6 @@
 <script>
     import DataTable from "../../widget/table/DataTable.svelte";
-    import OpGroup from "./OpGroup.svelte"
+    import Operations from "./Operations.svelte"
 
     let dataTableOptions = {
         ajax: 'http://47.105.46.129:3000/mock/11/api/users',
@@ -33,5 +33,5 @@
     }
 </script>
 <div>
-    <DataTable title="数据表" options={dataTableOptions} OpGroup={OpGroup} />
+    <DataTable title="数据表" options={dataTableOptions} groupOperationsComponent={Operations} />
 </div>

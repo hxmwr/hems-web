@@ -4,7 +4,7 @@
 
     export let options
     export let title = "数据表"
-    export let OpGroup
+    export let groupOperationsComponent = null
 
     let data = []
     let limit = "1"
@@ -43,7 +43,7 @@
     <div class="top-bar">
         <div class="title">{title}</div>
         <div class="op-group">
-            <OpGroup />
+            <svelte:component this={groupOperationsComponent} />
         </div>
     </div>
     <div class="menu-bar">
@@ -145,6 +145,7 @@
         border-bottom: 2px solid #e9ecef;
         padding: 0.5rem;
         text-align: left;
+        font-size: 14px;
     }
 
     th:last-child {
@@ -164,6 +165,7 @@
         border: 1px solid #e9ecef;
         border-left-width: 0;
         border-bottom-width: 0;
+        font-size: 14px;
     }
 
     td:last-child {
