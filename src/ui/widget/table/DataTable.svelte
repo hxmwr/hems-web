@@ -43,23 +43,23 @@
     <div class="top-bar">
         <div class="title">{title}</div>
         <div class="op-group">
-            <svelte:component this={groupOperationsComponent} />
-        </div>
-    </div>
-    <div class="menu-bar">
-        <div class="pg-size">
-            显示
-            <select bind:value={limit}>
-                <option value="1">10</option>
-                <option value="2">20</option>
-                <option value="3">30</option>
-                <option value="4">50</option>
-                <option value="5">100</option>
-            </select>
-            条记录
+            <svelte:component this={groupOperationsComponent}/>
         </div>
     </div>
     <div class="dt-wrapper">
+        <div class="menu-bar">
+            <div class="pg-size">
+                显示
+                <select bind:value={limit}>
+                    <option value="1">10</option>
+                    <option value="2">20</option>
+                    <option value="3">30</option>
+                    <option value="4">50</option>
+                    <option value="5">100</option>
+                </select>
+                条记录
+            </div>
+        </div>
         <div class="dt-pb"></div>
         <table class="dt">
             <thead class="dt-h">
@@ -88,10 +88,10 @@
             {/if}
             </tfoot>
         </table>
+        {#if data.length > 0}
+            <Pagination bind:page={page} total={total}/>
+        {/if}
     </div>
-    {#if data.length > 0}
-        <Pagination bind:page={page} total={total}/>
-    {/if}
     {#if showLoader}
         <div class="mask">
             <div class="loader">
@@ -123,13 +123,19 @@
     }
 
     .menu-bar {
-        margin: 6px 0;
+        margin: 8px 0;
         font-size: 12px;
+    }
+
+    .pg-size {
+        display: flex;
+        align-items: center;
     }
 
     .pg-size > select {
         height: 21px;
         padding: 0;
+        margin: 0 1px;
     }
 
     .dt {
@@ -180,13 +186,15 @@
     }
 
     .top-bar {
-        margin: 19px 0 16px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin: 21px 0 21px;
+        line-height: 1;
     }
+
     .top-bar > .title {
-        font-size: 28px;
+        font-size: 27px;
     }
 
     .top-bar > .op-group {
@@ -198,14 +206,16 @@
         align-items: center;
         justify-content: space-between;
     }
+
     .mask {
         top: 0;
         z-index: 999;
         position: absolute;
         width: 100%;
         height: 100%;
-        background-color: rgba(255,255,255,0.7);
+        background-color: rgba(255, 255, 255, 0.7);
     }
+
     .loader {
         position: fixed;
         border-radius: 8px;

@@ -1,6 +1,7 @@
 <script>
     import Menu from "./ui/widget/menu/Menu.svelte"
     import User from "./ui/crud/user/User.svelte";
+    import Overview from "./ui/page/Overview.svelte"
     import {Route, Router} from "./lib/routing"
 
     let iconFont = "font/iconfont.css"
@@ -30,6 +31,7 @@
             <div class="body" style="height: 3000px;">
                     <Route path="/" component={User} />
                     <Route path="/user" component={User} />
+                    <Route path="/overview" component={Overview} />
             </div>
             <div class="footer">
             </div>

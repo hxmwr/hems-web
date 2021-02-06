@@ -8,7 +8,7 @@
                 {
                     key: 1,
                     title: '指标看板',
-                    path: '/',
+                    path: '/overview',
                     icon: 'icon-biaoqianguanli',
                     isExpanded: false,
                     children: []
@@ -20,22 +20,22 @@
                     isExpanded: false,
                     children: [
                         {
-                            key: 101,
+                            key: 201,
                             title: 'Home',
                             path: ''
                         },
                         {
-                            key: 102,
+                            key: 202,
                             title: 'User',
                             path: 'user'
                         },
                         {
-                            key: 103,
+                            key: 203,
                             title: '菜单3',
                             path: ''
                         },
                         {
-                            key: 104,
+                            key: 204,
                             title: '菜单4',
                             path: ''
                         }
@@ -76,10 +76,20 @@
                 {
                     key: 7,
                     title: '系统设置',
-                    path: '/',
                     icon: 'icon-xitongguanli',
                     isExpanded: false,
-                    children: []
+                    children: [
+                        {
+                            key: 701,
+                            title: '用户管理',
+                            path: 'user'
+                        },
+                        {
+                            key: 702,
+                            title: '权限管理',
+                            path: 'auth'
+                        }
+                    ]
                 }
             ]
         }
