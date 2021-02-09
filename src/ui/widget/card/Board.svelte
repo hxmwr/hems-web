@@ -1,5 +1,5 @@
 <script>
-    import Card from "../../widget/card/Card.svelte";
+    import Card from "./Card.svelte";
 
     export let title
 </script>

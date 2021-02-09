@@ -1,9 +1,8 @@
 <script>
-    import Card from "../../widget/card/Card.svelte";
-    import DataLabel from "./DataLabel.svelte";
+    import KPI from "./KPI.svelte";
     import AjaxContent from "../../widget/ajax/AjaxContent.svelte";
-    import DetailedDataLabel from "./DetailedDataLabel.svelte";
-    import Board from "./Board.svelte";
+    import KPIAnalysis from "./KPIAnalysis.svelte";
+    import Board from "../../widget/card/Board.svelte";
 
     let url = "http://47.105.46.129:3000/mock/11/api/overview"
 </script>
@@ -12,9 +11,9 @@
     <div class="board-0">
         <Board title="主要指标">
             <div class="data-labels">
-                <AjaxContent url={url} let:json>
+                <AjaxContent delay={500} url={url} let:json>
                     {#each json.data.metrics as metric}
-                        <DataLabel {...metric} />
+                        <KPI data={metric} />
                     {/each}
                 </AjaxContent>
             </div>
@@ -27,24 +26,18 @@
         </Board>
     </div>
     <Board title="产品趋势">
-        <AjaxContent url="" delay={5000}>
             <div class="trend">
-
+                <KPIAnalysis data={{title: "乙烷", metric: "收率", value: "78.5%", cmpStd: "-4.8%", errStat: [2, 9, 25]}} />
+                <KPIAnalysis data={{title: "丙烷", metric: "收率", value: "68.5%", cmpStd: "3.6%", errStat: [2, 9, 25]}} />
             </div>
-        </AjaxContent>
     </Board>
     <Board title=能耗情况>
-        <div class="trend">
-            <DetailedDataLabel />
-            <DetailedDataLabel />
-            <DetailedDataLabel />
+        <div class="energy">
         </div>
     </Board>
     <Board title="生产情况">
-        <div class="trend">
-            <DetailedDataLabel />
-            <DetailedDataLabel />
-            <DetailedDataLabel />
+        <div class="production">
+
         </div>
     </Board>
 </div>
@@ -67,7 +60,7 @@
         padding: 16px;
     }
     .board-0 {
-        height: 186px;
+        height: 176px;
     }
     .board-1 {
         grid-area: 1/2/3/3;

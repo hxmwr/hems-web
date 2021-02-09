@@ -1,10 +1,9 @@
 <script>
     import Pagination from "./Pagination.svelte";
-    import RingLoader from "../spinner/RingLoader.svelte";
 
     export let options
     export let title = "数据表"
-    export let groupOperationsComponent = null
+    export let actionsComponent = null
 
     let data = []
     let limit = "1"
@@ -43,7 +42,7 @@
     <div class="top-bar">
         <div class="title">{title}</div>
         <div class="op-group">
-            <svelte:component this={groupOperationsComponent}/>
+            <svelte:component this={actionsComponent}/>
         </div>
     </div>
     <div class="dt-wrapper">
@@ -60,45 +59,41 @@
                 条记录
             </div>
         </div>
-        <div class="dt-pb"></div>
-        <table class="dt">
-            <thead class="dt-h">
-            <tr>
-                {#each options.columns as column}
-                    <th>{column.title}</th>
-                {/each}
-            </tr>
-            </thead>
-            <tbody class="dt-b">
-            {#each data as d,i}
+        <div class="dt-wrapper">
+            <table class="dt">
+                <thead class="dt-h">
                 <tr>
-                    {#each options.columns as col}
-                        <td>{d[col.data]}</td>
+                    {#each options.columns as column}
+                        <th style={"width:" + (column.width ? column.width : "auto")}>{column.title}</th>
                     {/each}
                 </tr>
-            {/each}
-            </tbody>
-            <tfoot class="dt-f">
-            {#if data.length === 0}
-                <tr>
-                    <td colspan={options.columns.length}>
-                        <div class="no-data">暂无数据</div>
-                    </td>
-                </tr>
-            {/if}
-            </tfoot>
-        </table>
+                </thead>
+                <tbody class="dt-b">
+                    {#each data as d,i}
+                        <tr>
+                            {#each options.columns as col}
+                                <td>{d[col.data]}</td>
+                            {/each}
+                        </tr>
+                    {/each}
+                </tbody>
+                <tfoot class="dt-f">
+                {#if data.length === 0 && !loading}
+                    <tr>
+                        <td colspan={options.columns.length}>
+                            <div class="no-data">暂无数据</div>
+                        </td>
+                    </tr>
+                {/if}
+                </tfoot>
+            </table>
+        </div>
         {#if data.length > 0}
-            <Pagination bind:page={page} total={total}/>
+            <div class="pagination">
+                <Pagination bind:page={page} total={total}/>
+            </div>
         {/if}
     </div>
-    {#if showLoader}
-        <div class="mask">
-            <div class="loader">
-                <RingLoader/>
-            </div>
-        </div>
-    {/if}
 </div>
 
 <style>
@@ -205,6 +200,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+
+    .pagination {
+        margin: 16px 0;
     }
 
     .mask {

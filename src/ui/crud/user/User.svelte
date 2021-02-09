@@ -1,37 +1,43 @@
 <script>
     import DataTable from "../../widget/table/DataTable.svelte";
-    import Operations from "./Operations.svelte"
+    import Actions from "./Actions.svelte"
 
     let dataTableOptions = {
         ajax: 'http://47.105.46.129:3000/mock/11/api/users',
         columns: [
             {
                 title: "Name",
-                data: "name"
+                data: "name",
+                width: "20%"
             },
             {
                 title: "Age",
-                data: "age"
+                data: "age",
+                width: "10%"
             },
             {
                 title: "Sex",
-                data: "sex"
+                data: "sex",
+                width: "10%"
             },
             {
                 title: "Address",
-                data: "address"
+                data: "address",
+                width: "20%"
             },
             {
                 title: "Email",
-                data: "email"
+                data: "email",
+                width: "30%"
             },
             {
                 title: "Phone",
-                data: "phone"
+                data: "phone",
+                width: "10%"
             }
         ]
     }
 </script>
 <div>
-    <DataTable title="数据表" options={dataTableOptions} groupOperationsComponent={Operations} />
+    <DataTable title="数据表" options={dataTableOptions} actionsComponent={Actions} />
 </div>

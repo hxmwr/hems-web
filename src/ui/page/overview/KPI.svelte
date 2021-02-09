@@ -2,14 +2,15 @@
     import Highcharts from "highcharts"
     import {onMount} from "svelte";
 
-    let chart
-
-    onMount(() => {
-        Highcharts.chart(chart, {
+    Highcharts.SparkLine = function (a, b, c) {
+        const hasRenderToArg = typeof a === 'string' || a.nodeName;
+        let options = arguments[hasRenderToArg ? 1 : 0];
+        const defaultOptions = {
             chart: {
+                renderTo: (options.chart && options.chart.renderTo) || (hasRenderToArg && a),
                 backgroundColor: null,
                 borderWidth: 0,
-                type: 'line',
+                type: 'area',
                 margin: [2, 0, 2, 0],
                 height: 50,
                 style: {
@@ -25,7 +26,6 @@
                 enabled: false
             },
             xAxis: {
-                visible: false,
                 labels: {
                     enabled: false
                 },
@@ -58,7 +58,7 @@
             plotOptions: {
                 series: {
                     animation: false,
-                    lineWidth: 2,
+                    lineWidth: 1,
                     shadow: false,
                     states: {
                         hover: {
@@ -79,68 +79,98 @@
                     negativeColor: '#910000',
                     borderColor: 'silver'
                 }
-            },
-            series: [
-                {
-                    color: 'rgb(251,102,108)',
-                    data: [3,2,3,5,1,2,3,2,3],
-                    pointStart: 1
-                }
-            ]
+            }
+        };
+
+        options = Highcharts.merge(defaultOptions, options);
+
+        return hasRenderToArg ?
+            new Highcharts.Chart(a, options, c) :
+            new Highcharts.Chart(options, b);
+    };
+
+    export let data
+    let chartContainer
+
+    onMount(() => {
+        Highcharts.SparkLine(chartContainer, {
+            series: [{
+                data: data.data,
+                pointStart: 1
+            }],
+            chart: {}
         })
     })
 </script>
 
-<div class="container with-loader">
-    <div class="left">
-        --
-    </div>
-    <div class="middle">
-        <div class="r1"><h3>乙烷收率75.2%, 比标准-4.8%</h3></div>
-        <div class="r2">
-             异常次数，本周3次，本月9次，本年25次
+<div class="container">
+    <div class="row1">
+        <div class="title">
+            {data.title}
         </div>
-        <div class="r3">
-            原因分析：无
+        <div class="metric">
+            {data.metric}
+        </div>
+        <div class="rate">
+            {data.rate}
         </div>
     </div>
-    <div class="right" bind:this={chart}>
-
+    <div class="row2">
+        <span class="number">{data.total}</span><span class="unit">{data.unit}</span>
+    </div>
+    <div class="row3" bind:this={chartContainer}>
     </div>
 </div>
 
+
 <style>
-    .container {
+     .container {
+         margin-right: 8px;
+         flex-grow: 1;
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;
+         height: 110px;
+     }
+
+     .container:last-child {
+         margin-right: 0;
+     }
+    .row1, .row2, .row3 {
         display: flex;
-        box-sizing: border-box;
-        padding: 0 0 8px;
+        align-items: center;
     }
-    .left {
-        width: 100px;
-        height: 100px;
+    .row1 {
+        height: 24px;
     }
-    .middle {
-        display: flex;
-        flex-direction: column;
-        font-size: 13px;
-        margin: 0 16px;
+    .row3 {
+        height: 50px;
     }
-    .right {
-        margin-left: 32px;
-        padding: 16px 16px;
-        max-width: 300px;
+    .row2 {
+        font-size: 26px;
     }
-    .r1 {
-        line-height: 24px;
-        margin-bottom: 8px;
-        white-space: nowrap;
+    .row2 > .number {
+        line-height: 1;
+        align-self: flex-end;
     }
-    .r2, .r3 {
-        line-height: 22px;
-        white-space: nowrap;
+
+    .row2 > .unit {
+        font-size: 16px;
+        align-self: flex-end;
+        color: #bababa;
     }
-    h3 {
-        margin: 0;
-        white-space: nowrap;
+    .title {
+        font-size: 16px;
+        color: grey;
+        margin-right: 4px;
+    }
+    .metric {
+        font-size:16px;
+        color: grey;
+        margin-right: 4px;
+    }
+    .rate {
+        font-size: 16px;
+        margin-right: 4px;
     }
 </style>

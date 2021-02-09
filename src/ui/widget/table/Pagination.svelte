@@ -78,8 +78,6 @@
         display: flex;
         font-size: 14px;
         user-select: none;
-        justify-content: flex-end;
-        margin: 16px;
     }
     .pg > .item {
         width: 35px;
