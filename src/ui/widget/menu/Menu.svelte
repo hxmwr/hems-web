@@ -142,7 +142,7 @@
 
 <style>
     .container {
-        height: calc(100vh - 53px);
+        max-height: calc(100vh - 53px);
         position: sticky;
         top: 53px;
         overflow-y: auto;
@@ -173,7 +173,7 @@
         list-style-type: none;
         margin: 0;
         padding-left: 0;
-        padding-top: 16px;
+        padding-top: 24px;
     }
 
     .mi {
@@ -183,8 +183,9 @@
         justify-content: space-between;
         cursor: pointer;
         color: #535a60;
-        font-size: 13px;
-        padding: 10px 10px 10px 16px;
+        font-size: 12px;
+        padding: 8px 10px 8px 16px;
+        margin-bottom: 2px;
     }
 
     .mi.expanded {
@@ -196,11 +197,12 @@
     }
 
     .mi-i {
+        font-size: 14px;
     }
 
     .mi-t {
         margin-left: 10px;
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .mi-ei {
@@ -230,9 +232,9 @@
         position: relative;
         cursor: pointer;
         padding-left: 52px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        font-size: 13px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 12px;
         color: #535a60;
         border-bottom-left-radius: 2px;
         border-top-left-radius: 2px;

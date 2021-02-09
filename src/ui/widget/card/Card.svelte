@@ -10,7 +10,12 @@
 
 
 <style>
+    .card {
+        height: 100%;
+    }
     .ring-island {
+        height: 100%;
+        box-sizing: border-box;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;

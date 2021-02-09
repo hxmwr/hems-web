@@ -1,7 +1,7 @@
 <script>
     import Menu from "./ui/widget/menu/Menu.svelte"
     import User from "./ui/crud/user/User.svelte";
-    import Overview from "./ui/page/Overview.svelte"
+    import Overview from "./ui/page/overview/Overview.svelte"
     import {Route, Router} from "./lib/routing"
 
     let iconFont = "font/iconfont.css"
@@ -9,35 +9,35 @@
 
 </script>
 <Router url="">
-<div>
-    <div class="top-bar">
-        <div class="logo">
-            <img src="img/hems.svg" alt="logo">
-        </div>
-        <div class="sys-menu">
-            <div class="avatar">
-                <img src="img/6.jpg"/>
+    <div class="root">
+        <div class="top-bar">
+            <div class="logo">
+                <img src="img/hems.svg" alt="logo">
+            </div>
+            <div class="sys-menu">
+                <div class="avatar">
+                    <img src="img/6.jpg"/>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="menu-area">
-            <Menu/>
-        </div>
-        <header>
+        <div class="container">
+            <div class="menu-area">
+                <Menu/>
+            </div>
+            <header>
 
-        </header>
-        <main>
-            <div class="body" style="height: 3000px;">
-                    <Route path="/" component={User} />
-                    <Route path="/user" component={User} />
-                    <Route path="/overview" component={Overview} />
-            </div>
-            <div class="footer">
-            </div>
-        </main>
+            </header>
+            <main>
+                <div class="body">
+                    <Route path="/" component={User}/>
+                    <Route path="/user" component={User}/>
+                    <Route path="/overview" component={Overview}/>
+                </div>
+                <div class="footer">
+                </div>
+            </main>
+        </div>
     </div>
-</div>
 </Router>
 
 
@@ -46,10 +46,14 @@
 </svelte:head>
 
 <style>
+    .root {
+        height: 100%;
+        width: 100%;
+    }
     .container {
         display: grid;
-        grid-template-columns: 180px 1fr;
-        grid-template-rows: 50px 1fr;
+        grid-template-columns: 180px;
+        grid-template-rows: 50px;
         height: 100vh;
         transition: all .2s;
         padding-top: 3px;
@@ -116,6 +120,6 @@
     }
 
     main > .body {
-        margin: 16px;
+        margin: 24px 16px 16px;
     }
 </style>

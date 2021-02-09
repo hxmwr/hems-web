@@ -189,7 +189,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 21px 0 21px;
+        margin: 24px 0 21px;
         line-height: 1;
     }
 
