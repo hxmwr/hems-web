@@ -21,22 +21,22 @@
                     children: [
                         {
                             key: 201,
-                            title: 'Home',
+                            title: '中心电表',
                             path: ''
                         },
                         {
                             key: 202,
-                            title: 'User',
+                            title: '电表001-x',
                             path: 'user'
                         },
                         {
                             key: 203,
-                            title: '菜单3',
+                            title: '辅助用电-X',
                             path: ''
                         },
                         {
                             key: 204,
-                            title: '菜单4',
+                            title: '辅助用电',
                             path: ''
                         }
                     ]

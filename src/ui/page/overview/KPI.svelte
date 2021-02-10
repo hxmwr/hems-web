@@ -104,7 +104,7 @@
 </script>
 
 <div class="container">
-    <div class="row1">
+    <div class="r1">
         <div class="title">
             {data.title}
         </div>
@@ -115,10 +115,10 @@
             {data.rate}
         </div>
     </div>
-    <div class="row2">
+    <div class="r2">
         <span class="number">{data.total}</span><span class="unit">{data.unit}</span>
     </div>
-    <div class="row3" bind:this={chartContainer}>
+    <div class="r3" bind:this={chartContainer}>
     </div>
 </div>
 
@@ -136,28 +136,28 @@
      .container:last-child {
          margin-right: 0;
      }
-    .row1, .row2, .row3 {
+    .r1, .r2, .r3 {
         display: flex;
         align-items: center;
     }
-    .row1 {
+    .r1 {
         height: 24px;
     }
-    .row3 {
+    .r3 {
         height: 50px;
     }
-    .row2 {
-        font-size: 26px;
+    .r2 {
+        font-size: 22px;
     }
-    .row2 > .number {
+    .r2 > .number {
         line-height: 1;
         align-self: flex-end;
     }
 
-    .row2 > .unit {
-        font-size: 16px;
+    .r2 > .unit {
+        font-size: 14px;
         align-self: flex-end;
-        color: #bababa;
+        color: #808080;
     }
     .title {
         font-size: 16px;
