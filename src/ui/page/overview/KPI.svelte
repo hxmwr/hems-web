@@ -1,6 +1,7 @@
 <script>
     import Highcharts from "highcharts"
     import {onMount} from "svelte";
+    import {colors} from "../../../res/values";
 
     Highcharts.SparkLine = function (a, b, c) {
         const hasRenderToArg = typeof a === 'string' || a.nodeName;
@@ -10,9 +11,9 @@
                 renderTo: (options.chart && options.chart.renderTo) || (hasRenderToArg && a),
                 backgroundColor: null,
                 borderWidth: 0,
-                type: 'area',
+                type: 'line',
                 margin: [2, 0, 2, 0],
-                height: 50,
+                height: 16,
                 style: {
                     overflow: 'visible'
                 },
@@ -95,6 +96,7 @@
     onMount(() => {
         Highcharts.SparkLine(chartContainer, {
             series: [{
+                color: colors.main,
                 data: data.data,
                 pointStart: 1
             }],
@@ -105,7 +107,7 @@
 
 <div class="container">
     <div class="r1">
-        <div class="title">
+        <div class="title-bar">
             {data.title}
         </div>
         <div class="metric">
@@ -159,7 +161,7 @@
         align-self: flex-end;
         color: #808080;
     }
-    .title {
+    .title-bar {
         font-size: 16px;
         color: grey;
         margin-right: 4px;

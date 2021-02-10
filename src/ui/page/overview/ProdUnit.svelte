@@ -1,5 +1,5 @@
 <script>
-    import Tab from "./Tab.svelte";
+    import Tab from "../../widget/tab/Tab.svelte";
 
     let tab1 = 0
     let tab2 = 0
@@ -8,9 +8,9 @@
 
 <div class="container">
     <div class="r1">
-        <div class="title">原料气压缩机</div>
+        <div class="title-bar">原料气压缩机</div>
         <div>
-            <Tab items={[{title: "总效率"},{title: "总功耗"}, {title: "电单耗"}]} bind:activeTabIndex={tab1}/>
+            <Tab tabs={[{title: "总效率"},{title: "总功耗"}, {title: "电单耗"}]} bind:activeTabIndex={tab1}/>
         </div>
     </div>
     <div class="r2">
@@ -55,7 +55,7 @@
         padding: 30px 0;
     }
 
-    .title {
+    .title-bar {
         font-weight: bold;
         font-size: 14px;
         line-height: 24px;
@@ -65,19 +65,19 @@
         border-radius: 4px;
         height: 30px;
         width: 300px;
-        background: lightgrey;
+        background: var(--ring-line-color);
     }
     .indicator > .value {
         height: 100%;
         border-radius: 4px;
-        background: orangered;
+        background: var(--ring-main-color);
     }
     .indicator > .target-value {
         position: absolute;
         height: 50px;
         top: -10px;
-        width: 1px;
-        background: #1bbc9c;
+        width: 2px;
+        background: #E30000;
     }
     .main {
         font-size: 26px;

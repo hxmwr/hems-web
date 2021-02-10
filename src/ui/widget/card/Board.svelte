@@ -2,29 +2,44 @@
     import Card from "./Card.svelte";
 
     export let title
+    export let actions
 </script>
 
 <Card>
     <div class="container">
-        <div class="title"><span>{title}</span><div></div></div>
+        <div class="title-bar">
+            <span>{title}</span>
+            <div class="actions">
+                <slot name="actions">
+                </slot>
+            </div>
+        </div>
         <div class="content">
-            <slot>
-
+            <slot name="content">
             </slot>
         </div>
     </div>
 </Card>
 
 <style>
-    .title {
+    .title-bar {
         height: 32px;
         position: relative;
         box-sizing: border-box;
         padding: 0 16px;
         font-weight: 600;
-        border-bottom: 1px solid rgba(0,0,0,0);
+        border-bottom: 1px solid rgba(0, 0, 0, 0);
+        display: flex;
+        justify-content: space-between;
     }
-    .title:after {
+
+    .title-bar > .actions {
+        display: flex;
+        height: 100%;
+        align-items: center;
+    }
+
+    .title-bar:after {
         content: "";
         position: absolute;
         left: 16px;
@@ -33,14 +48,17 @@
         height: 1px;
         background-color: rgba(0, 42, 76, 0.1);
     }
-    .title > span {
+
+    .title-bar > span {
         line-height: 30px;
         font-size: 13px;
         color: var(--ring-text-color);
     }
+
     .content {
         position: relative;
     }
+
     .content::before {
         position: absolute;
         z-index: 1;

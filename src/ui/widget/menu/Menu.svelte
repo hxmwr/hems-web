@@ -1,5 +1,9 @@
 <script>
     import {Link} from "../../../lib/routing"
+    import {getContext, onMount} from "svelte";
+    import {ROUTER, LOCATION} from "../../../lib/routing/contexts";
+    console.log(getContext(LOCATION))
+    console.log(getContext(ROUTER))
 
     let menus = [
         {
@@ -18,28 +22,7 @@
                     title: '用电分析',
                     icon: 'icon-bociguanli',
                     isExpanded: false,
-                    children: [
-                        {
-                            key: 201,
-                            title: '中心电表',
-                            path: ''
-                        },
-                        {
-                            key: 202,
-                            title: '电表001-x',
-                            path: 'user'
-                        },
-                        {
-                            key: 203,
-                            title: '辅助用电-X',
-                            path: ''
-                        },
-                        {
-                            key: 204,
-                            title: '辅助用电',
-                            path: ''
-                        }
-                    ]
+                    path: '/electricity'
                 },
                 {
                     key: 3,
@@ -82,12 +65,12 @@
                         {
                             key: 701,
                             title: '用户管理',
-                            path: 'user'
+                            path: '/user'
                         },
                         {
                             key: 702,
                             title: '权限管理',
-                            path: 'auth'
+                            path: '/auth'
                         }
                     ]
                 }
@@ -95,6 +78,9 @@
         }
     ]
     let activeItemKey = 1
+
+    onMount(() => {
+    })
 
     function handleClickMenuItem(event, key) {
         activeItemKey = key

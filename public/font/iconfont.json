@@ -1,10 +1,17 @@
 {
-  "id": "",
-  "name": "",
+  "id": "2372405",
+  "name": "hems",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
+    {
+      "icon_id": "15617234",
+      "name": "triangle",
+      "font_class": "triangle",
+      "unicode": "e8b5",
+      "unicode_decimal": 59573
+    },
     {
       "icon_id": "19545452",
       "name": "波次管理",

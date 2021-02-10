@@ -40,7 +40,7 @@
 
 <div class="container">
     <div class="top-bar">
-        <div class="title">{title}</div>
+        <div class="title-bar">{title}</div>
         <div class="op-group">
             <svelte:component this={actionsComponent}/>
         </div>
@@ -185,10 +185,9 @@
         justify-content: space-between;
         align-items: center;
         margin: 24px 0 21px;
-        line-height: 1;
     }
 
-    .top-bar > .title {
+    .top-bar > .title-bar {
         font-size: 27px;
     }
 

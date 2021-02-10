@@ -13,7 +13,7 @@
 <div class="container">
     <div class="board-0">
         <Board title="主要指标">
-            <div class="kpi">
+            <div class="kpi" slot="content">
                 <AjaxContent delay={500} url={url} let:json>
                     {#each json.data.metrics as metric}
                         <KPI data={metric}/>
@@ -25,20 +25,20 @@
 
     <div class="board-1">
         <Board title="关键设备及系统">
-            <div class="kpu">
+            <div class="kpu" slot="content">
                 <ProdUnit />
                 <ProdUnit />
             </div>
         </Board>
     </div>
     <Board title="产品趋势">
-        <div class="trend">
+        <div class="trend" slot="content">
             <KPIAnalysis data={{title: "乙烷", metric: "收率", value: "78.5%", cmpStd: "-4.8%", errStat: [2, 9, 25]}}/>
             <KPIAnalysis data={{title: "丙烷", metric: "收率", value: "68.5%", cmpStd: "3.6%", errStat: [2, 9, 25]}}/>
         </div>
     </Board>
     <Board title=能耗情况>
-        <div class="energy">
+        <div class="energy" slot="content">
             <div class="table">
                 <SimpleTable />
             </div>
@@ -48,7 +48,7 @@
         </div>
     </Board>
     <Board title="生产情况">
-        <div class="production">
+        <div class="production" slot="content">
             <SimpleTable />
         </div>
     </Board>

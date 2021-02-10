@@ -1,20 +1,16 @@
 <script>
-    import Highcharts from "highcharts"
-    import {onMount} from "svelte";
-    import {colors} from "../../../res/values";
+    import Highcharts from "highcharts";
 
-    export let data
-
-    let chart
-
-    onMount(() => {
-        Highcharts.chart(chart, {
+    Highcharts.SparkLine = function (a, b, c) {
+        const hasRenderToArg = typeof a === 'string' || a.nodeName;
+        let options = arguments[hasRenderToArg ? 1 : 0];
+        const defaultOptions = {
             chart: {
+                renderTo: (options.chart && options.chart.renderTo) || (hasRenderToArg && a),
                 backgroundColor: null,
                 borderWidth: 0,
-                type: 'spline',
+                type: 'line',
                 margin: [2, 0, 2, 0],
-                height: 50,
                 style: {
                     overflow: 'visible'
                 },
@@ -28,7 +24,6 @@
                 enabled: false
             },
             xAxis: {
-                visible: false,
                 labels: {
                     enabled: false
                 },
@@ -61,7 +56,7 @@
             plotOptions: {
                 series: {
                     animation: false,
-                    lineWidth: 2,
+                    lineWidth: 1,
                     shadow: false,
                     states: {
                         hover: {
@@ -82,68 +77,13 @@
                     negativeColor: '#910000',
                     borderColor: 'silver'
                 }
-            },
-            series: [
-                {
-                    color: colors.main,
-                    data: Array(100).fill(0).map(() => Math.random()),
-                    pointStart: 1
-                }
-            ]
-        })
-    })
+            }
+        };
+
+        options = Highcharts.merge(defaultOptions, options);
+
+        return hasRenderToArg ?
+            new Highcharts.Chart(a, options, c) :
+            new Highcharts.Chart(options, b);
+    };
 </script>
-
-<div class="container with-loader">
-    <div class="left">
-        --
-    </div>
-    <div class="middle">
-        <div class="r1"><h3>{data.title}{data.metric}{data.value}, 比标准{data.cmpStd}</h3></div>
-        <div class="r2">
-             异常次数，本周{data.errStat[0]}次，本月{data.errStat[1]}次，本年{data.errStat[2]}次
-        </div>
-        <div class="r3">
-            原因分析：无
-        </div>
-    </div>
-    <div class="right" bind:this={chart}>
-
-    </div>
-</div>
-
-<style>
-    .container {
-        display: flex;
-        box-sizing: border-box;
-        padding: 0 0 8px;
-    }
-    .left {
-        width: 100px;
-        height: 100px;
-    }
-    .middle {
-        display: flex;
-        flex-direction: column;
-        font-size: 13px;
-        margin: 0 16px;
-    }
-    .right {
-        margin-left: 32px;
-        padding: 16px 16px;
-        width: 320px;
-    }
-    .r1 {
-        line-height: 24px;
-        margin-bottom: 8px;
-        white-space: nowrap;
-    }
-    .r2, .r3 {
-        line-height: 22px;
-        white-space: nowrap;
-    }
-    h3 {
-        margin: 0;
-        white-space: nowrap;
-    }
-</style>

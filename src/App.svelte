@@ -2,6 +2,7 @@
     import Menu from "./ui/widget/menu/Menu.svelte"
     import User from "./ui/crud/user/User.svelte";
     import Overview from "./ui/page/overview/Overview.svelte"
+    import Electricity from "./ui/page/electricity/Electricity.svelte"
     import {Route, Router} from "./lib/routing"
 
     let iconFont = "font/iconfont.css"
@@ -29,9 +30,10 @@
             </header>
             <main>
                 <div class="body">
-                    <Route path="/" component={User}/>
+                    <Route path="/" component={Overview}/>
                     <Route path="/user" component={User}/>
                     <Route path="/overview" component={Overview}/>
+                    <Route path="/electricity" component={Electricity} />
                 </div>
                 <div class="footer">
                 </div>

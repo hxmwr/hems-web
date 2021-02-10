@@ -16,6 +16,7 @@
         color: #fff;
         background-color: #129f83;
         background-image: linear-gradient(-180deg, #1bbc9c 0%, #15a98b 90%);
+        margin: 0;
     }
 
     button:hover {
