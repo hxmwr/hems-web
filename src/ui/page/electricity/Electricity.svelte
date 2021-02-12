@@ -1,9 +1,12 @@
 <script>
     import GaugeTree from "./GaugeTree.svelte";
-    import Card from "../../widget/card/Card.svelte";
     import Tab from "../../widget/tab/Tab.svelte";
     import Board from "../../widget/card/Board.svelte";
     import Percentage from "./Percentage.svelte";
+    import SimpleLineChart from "../../widget/chart/SimpleLineChart.svelte";
+    import {colors} from "../../../res/values";
+    import RadioButtonGroup from "../../widget/button/RadioButtonGroup.svelte";
+    import Datepicker from "../../widget/calendar/Datepicker.svelte";
 
     let tree = {
         children: [
@@ -66,7 +69,20 @@
         <GaugeTree bind:activeKey={activeTreeKey} {tree} />
     </div>
     <div class="content">
-        <div class="title-bar">{title}</div>
+        <div class="title-bar">
+            <span class="title">{title}</span>
+            <div class="actions">
+                <RadioButtonGroup buttons={[
+                    {text: "日"},
+                    {text: "周"},
+                    {text: "月"}
+                ]} />
+                <div style="margin-left: 16px;">
+                    <Datepicker />
+                </div>
+
+            </div>
+        </div>
         <div class="tabs">
             <Tab  tabs={tabs} activeTabIndex={activeTabIndex}/>
         </div>
@@ -81,7 +97,14 @@
                             1.176
                         </div>
                         <div class="kic">
-
+                            <SimpleLineChart options={{
+                                series: [
+                                    {
+                                        data: Array(10).fill(0).map(() => Math.random()),
+                                        color: colors.main
+                                    }
+                                ]
+                            }} />
                         </div>
                     </div>
                     <div slot="actions">
@@ -89,19 +112,104 @@
                     </div>
                 </Board>
                 <Board title="电费">
-                    <div class="kpi-item">电价指数</div>
+                    <div class="ki" slot="content">
+                        <div class="kiv">
+                            1.176
+                        </div>
+                        <div class="kic">
+                            <SimpleLineChart options={{
+                                series: [
+                                    {
+                                        data: Array(10).fill(0).map(() => Math.random()),
+                                        color: colors.main
+                                    }
+                                ]
+                            }} />
+                        </div>
+                    </div>
+                    <div slot="actions">
+                        <Percentage value={-2.68} />
+                    </div>
                 </Board>
                 <Board title="平均电价">
-                    <div class="kpi-item">电价指数</div>
+                    <div class="ki" slot="content">
+                        <div class="kiv">
+                            1.176
+                        </div>
+                        <div class="kic">
+                            <SimpleLineChart options={{
+                                series: [
+                                    {
+                                        data: Array(10).fill(0).map(() => Math.random()),
+                                        color: colors.main
+                                    }
+                                ]
+                            }} />
+                        </div>
+                    </div>
+                    <div slot="actions">
+                        <Percentage value={-2.68} />
+                    </div>
                 </Board>
                 <Board title="最大需量">
-                    <div class="kpi-item">电价指数</div>
+                    <div class="ki" slot="content">
+                        <div class="kiv">
+                            1.176
+                        </div>
+                        <div class="kic">
+                            <SimpleLineChart options={{
+                                series: [
+                                    {
+                                        data: Array(10).fill(0).map(() => Math.random()),
+                                        color: colors.main
+                                    }
+                                ]
+                            }} />
+                        </div>
+                    </div>
+                    <div slot="actions">
+                        <Percentage value={2.68} />
+                    </div>
                 </Board>
                 <Board title="无功电量">
-                    <div class="kpi-item">电价指数</div>
+                    <div class="ki" slot="content">
+                        <div class="kiv">
+                            1.176
+                        </div>
+                        <div class="kic">
+                            <SimpleLineChart options={{
+                                series: [
+                                    {
+                                        data: Array(10).fill(0).map(() => Math.random()),
+                                        color: colors.main
+                                    }
+                                ]
+                            }} />
+                        </div>
+                    </div>
+                    <div slot="actions">
+                        <Percentage value={-2.68} />
+                    </div>
                 </Board>
                 <Board title="有功功率">
-                    <div class="kpi-item">电价指数</div>
+                    <div class="ki" slot="content">
+                        <div class="kiv">
+                            1.176
+                        </div>
+                        <div class="kic">
+                            <SimpleLineChart options={{
+                                series: [
+                                    {
+                                        data: Array(10).fill(0).map(() => Math.random()),
+                                        color: colors.main
+                                    }
+                                ]
+                            }} />
+                        </div>
+                    </div>
+                    <div slot="actions">
+                        <Percentage value={-2.68} />
+                    </div>
                 </Board>
             </div>
             <div>
@@ -119,6 +227,11 @@
         display: flex;
     }
     .title-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .title-bar > .title {
         font-size: 27px;
     }
     .tabs {
@@ -151,7 +264,7 @@
     }
     /* kpi item */
     .ki {
-        padding: 16px;
+        padding: 8px 16px;
     }
     /* kpi item value */
     .kiv {
@@ -160,6 +273,9 @@
     }
     /* kpi item chart */
     .kic {
-
+        height: 40px;
+    }
+    .actions {
+        display: flex;
     }
 </style>

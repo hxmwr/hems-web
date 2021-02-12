@@ -40,6 +40,7 @@
                 tickPositions: []
             },
             yAxis: {
+                visible: false,
                 endOnTick: false,
                 startOnTick: false,
                 labels: {
@@ -118,6 +119,9 @@
         box-sizing: border-box;
         padding: 0 0 8px;
     }
+    .container:last-child {
+        padding-bottom: 0;
+    }
     .left {
         width: 100px;
         height: 100px;
@@ -129,9 +133,8 @@
         margin: 0 16px;
     }
     .right {
-        margin-left: 32px;
         padding: 16px 16px;
-        width: 320px;
+        flex-grow: 1;
     }
     .r1 {
         line-height: 24px;

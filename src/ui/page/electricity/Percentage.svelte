@@ -11,6 +11,14 @@
         font-size: 9px;
         vertical-align: middle;
     }
+    .positive > .iconfont {
+        transform: rotateZ(0deg);
+    }
+    .negative > .iconfont {
+        display: inline-block;
+        transform: rotateZ(180deg);
+        margin-top: -2px;
+    }
     .iconfont.hide {
         visibility: hidden;
     }
