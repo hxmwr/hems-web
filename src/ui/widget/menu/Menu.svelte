@@ -1,9 +1,9 @@
 <script>
     import {Link} from "../../../lib/routing"
     import {getContext, onMount} from "svelte";
-    import {ROUTER, LOCATION} from "../../../lib/routing/contexts";
-    console.log(getContext(LOCATION))
-    console.log(getContext(ROUTER))
+    import {ROUTER} from "../../../lib/routing/contexts";
+
+    const { activeRoute } = getContext(ROUTER)
 
     let menus = [
         {
@@ -79,7 +79,34 @@
     ]
     let activeItemKey = 1
 
+    function findPath(root, path) {
+        if (root.path === path) return root.key
+        if (root.children && root.children.length > 0) {
+            for (let i = 0; i < root.children.length; i++) {
+                let res = findPath(root.children[i], path)
+                if (res != null) {
+                    return res
+                }
+            }
+        }
+        return null
+    }
+
+    let unsubscribe = activeRoute.subscribe((v) => {
+        if (!v) return
+        for (let i = 0; i < menus.length; i++) {
+            for (let j = 0; j < menus[i].items.length; j++) {
+                let res = findPath(menus[i].items[j], v.route._path)
+                if (res != null) {
+                    activeItemKey = res
+                    return
+                }
+            }
+        }
+    })
+
     onMount(() => {
+        unsubscribe()
     })
 
     function handleClickMenuItem(event, key) {

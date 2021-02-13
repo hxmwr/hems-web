@@ -7,6 +7,9 @@
     import {colors} from "../../../res/values";
     import RadioButtonGroup from "../../widget/button/RadioButtonGroup.svelte";
     import Datepicker from "../../widget/calendar/Datepicker.svelte";
+    import SpiderWebChart from "../../widget/chart/SpiderWebChart.svelte";
+    import SimpleTable from "../../widget/table/SimpleTable.svelte";
+    import AjaxContent from "../../widget/ajax/AjaxContent.svelte";
 
     let tree = {
         children: [
@@ -66,7 +69,7 @@
 
 <div class="container">
     <div class="tree">
-        <GaugeTree bind:activeKey={activeTreeKey} {tree} />
+        <GaugeTree bind:activeKey={activeTreeKey} {tree}/>
     </div>
     <div class="content">
         <div class="title-bar">
@@ -76,147 +79,59 @@
                     {text: "日"},
                     {text: "周"},
                     {text: "月"}
-                ]} />
+                ]}/>
                 <div style="margin-left: 16px;">
-                    <Datepicker />
+                    <Datepicker/>
                 </div>
 
             </div>
         </div>
         <div class="tabs">
-            <Tab  tabs={tabs} activeTabIndex={activeTabIndex}/>
+            <Tab tabs={tabs} activeTabIndex={activeTabIndex}/>
         </div>
         <div class="main">
             <div>
-                <Board title="有功电量" />
+                <Board title="有功电量"/>
             </div>
-            <div class="kpi">
-                <Board title="电价指数">
-                    <div class="ki" slot="content">
-                        <div class="kiv">
-                            1.176
-                        </div>
-                        <div class="kic">
-                            <SimpleLineChart options={{
-                                series: [
-                                    {
-                                        data: Array(10).fill(0).map(() => Math.random()),
-                                        color: colors.main
-                                    }
-                                ]
-                            }} />
-                        </div>
+            <div style="width: 352px;height: 392px;" class="with-loader">
+                <AjaxContent url="http://47.105.46.129:3000/mock/11/api/electricity/kpi" let:json>
+                    <div class="kpi" {json}>
+                        {#each json.data as d}
+                            <Board title={d.item}>
+                                <div class="ki" slot="content">
+                                    <div class="kiv"><span>{d.value}</span><span class="unit">{d.unit}</span></div>
+                                    <div class="kic">
+                                        <SimpleLineChart options={{series: [{data: d.data,color: colors.main}]}}/>
+                                    </div>
+                                </div>
+                                <div slot="actions">
+                                    <Percentage value={d.change}/>
+                                </div>
+                            </Board>
+                        {/each}
                     </div>
-                    <div slot="actions">
-                        <Percentage value={-2.68} />
-                    </div>
-                </Board>
-                <Board title="电费">
-                    <div class="ki" slot="content">
-                        <div class="kiv">
-                            1.176
+                </AjaxContent>
+            </div>
+
+            <div>
+                <Board title="电能健康">
+                    <div class="eh" slot="content">
+                        <div class="chart">
+                            <SpiderWebChart/>
                         </div>
-                        <div class="kic">
-                            <SimpleLineChart options={{
-                                series: [
-                                    {
-                                        data: Array(10).fill(0).map(() => Math.random()),
-                                        color: colors.main
-                                    }
-                                ]
-                            }} />
+                        <div>
+                            <div>
+                                <SimpleLineChart/>
+                            </div>
+                            <div>
+                                <SimpleTable/>
+                            </div>
                         </div>
-                    </div>
-                    <div slot="actions">
-                        <Percentage value={-2.68} />
-                    </div>
-                </Board>
-                <Board title="平均电价">
-                    <div class="ki" slot="content">
-                        <div class="kiv">
-                            1.176
-                        </div>
-                        <div class="kic">
-                            <SimpleLineChart options={{
-                                series: [
-                                    {
-                                        data: Array(10).fill(0).map(() => Math.random()),
-                                        color: colors.main
-                                    }
-                                ]
-                            }} />
-                        </div>
-                    </div>
-                    <div slot="actions">
-                        <Percentage value={-2.68} />
-                    </div>
-                </Board>
-                <Board title="最大需量">
-                    <div class="ki" slot="content">
-                        <div class="kiv">
-                            1.176
-                        </div>
-                        <div class="kic">
-                            <SimpleLineChart options={{
-                                series: [
-                                    {
-                                        data: Array(10).fill(0).map(() => Math.random()),
-                                        color: colors.main
-                                    }
-                                ]
-                            }} />
-                        </div>
-                    </div>
-                    <div slot="actions">
-                        <Percentage value={2.68} />
-                    </div>
-                </Board>
-                <Board title="无功电量">
-                    <div class="ki" slot="content">
-                        <div class="kiv">
-                            1.176
-                        </div>
-                        <div class="kic">
-                            <SimpleLineChart options={{
-                                series: [
-                                    {
-                                        data: Array(10).fill(0).map(() => Math.random()),
-                                        color: colors.main
-                                    }
-                                ]
-                            }} />
-                        </div>
-                    </div>
-                    <div slot="actions">
-                        <Percentage value={-2.68} />
-                    </div>
-                </Board>
-                <Board title="有功功率">
-                    <div class="ki" slot="content">
-                        <div class="kiv">
-                            1.176
-                        </div>
-                        <div class="kic">
-                            <SimpleLineChart options={{
-                                series: [
-                                    {
-                                        data: Array(10).fill(0).map(() => Math.random()),
-                                        color: colors.main
-                                    }
-                                ]
-                            }} />
-                        </div>
-                    </div>
-                    <div slot="actions">
-                        <Percentage value={-2.68} />
                     </div>
                 </Board>
             </div>
             <div>
-                <Board title="电能健康" />
-            </div>
-            <div>
-                <Board title="峰谷平用电分析" />
+                <Board title="峰谷平用电分析"/>
             </div>
         </div>
     </div>
@@ -226,18 +141,22 @@
     .container {
         display: flex;
     }
+
     .title-bar {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
+
     .title-bar > .title {
         font-size: 27px;
     }
+
     .tabs {
         margin: 16px 0;
         display: flex;
     }
+
     .tree {
         width: 220px;
         background-color: var(--ring-sidebar-background-color);
@@ -245,16 +164,19 @@
         margin-top: 16px;
         align-self: flex-start;
     }
+
     .content {
         margin-left: 32px;
         flex-grow: 1;
     }
+
     .main {
         display: grid;
         grid-gap: 16px;
         grid-template-columns: 2fr 2fr 4fr;
         grid-template-rows: 1fr 1fr;
     }
+
     .kpi {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -262,20 +184,37 @@
         grid-gap: 16px;
         font-size: 13px;
     }
+
     /* kpi item */
     .ki {
         padding: 8px 16px;
     }
+
     /* kpi item value */
     .kiv {
         font-size: 26px;
         font-weight: bold;
     }
+
     /* kpi item chart */
     .kic {
         height: 40px;
     }
+
     .actions {
         display: flex;
+    }
+
+    /* electricity health */
+    .eh {
+        padding: 16px;
+        display: flex;
+    }
+
+    .unit {
+        vertical-align: middle;
+        font-size: 12px;
+        font-weight: normal;
+        margin-left: 4px;
     }
 </style>

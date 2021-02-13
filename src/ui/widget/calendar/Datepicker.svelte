@@ -261,7 +261,7 @@
     }
 
     .shrink {
-        animation: svelte-mc1z8c-shrink 150ms forwards cubic-bezier(.92, .09, .18, 1.05);
+        animation: shrink 150ms forwards cubic-bezier(.92, .09, .18, 1.05);
     }
 
     .today:not(.selected):hover {

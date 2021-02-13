@@ -1,53 +1,89 @@
 <script>
-
+    export let options = {
+        columns: [
+            {
+                label: "名称",
+                data: "name"
+            },
+            {
+                label: "单耗",
+                data: "uc"
+            },
+            {
+                label: "环比",
+                data: "change"
+            },
+            {
+                label: "日累计流量",
+                data: "apd"
+            },
+            {
+                label: "月累计流量",
+                data: "apm"
+            },
+            {
+                label: "年累计流量",
+                data: "apy"
+            }
+        ],
+        data: [
+            {
+                name: "燃料气",
+                uc: "134.638Nm3/万标",
+                change: "-0.46%",
+                apd: "0.96Nm3/万标",
+                apm: "5.772",
+                apy: "49.029"
+            },
+            {
+                name: "电",
+                uc: "2593.604Nm3/万标",
+                change: "9.83%",
+                apd: "13.065Nm3/万标",
+                apm: "99.568",
+                apy: "730.449"
+            },
+            {
+                name: "冷却水",
+                uc: "2593.604Nm3/万标",
+                change: "9.83%",
+                apd: "13.065Nm3/万标",
+                apm: "99.568",
+                apy: "730.449"
+            },
+            {
+                name: "氮气",
+                uc: "2593.604Nm3/万标",
+                change: "9.83%",
+                apd: "13.065Nm3/万标",
+                apm: "99.568",
+                apy: "730.449"
+            }
+        ]
+    }
 </script>
 
-<table>
-    <thead>
+{#if options}
+    <table>
+        <thead>
         <tr>
-            <th>名称</th>
-            <th>单耗</th>
-            <th>环比</th>
-            <th>日累计流量</th>
-            <th>月累计流量</th>
-            <th>年累计流量</th>
+            {#each options.columns as col}
+                <th style={"width:" + (col.width ? col.width: "auto")}>{col.label}</th>
+            {/each}
         </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>燃料气</td>
-            <td>134.638Nm3/万标</td>
-            <td>-0.46%</td>
-            <td>0.96Nm3/万标</td>
-            <td>5.772</td>
-            <td>49.029</td>
-        </tr>
-        <tr>
-            <td>电</td>
-            <td>2593.604Nm3/万标</td>
-            <td>9.83%</td>
-            <td>13.065Nm3/万标</td>
-            <td>99.568</td>
-            <td>730.449</td>
-        </tr>
-        <tr>
-            <td>冷却水</td>
-            <td>2593.604Nm3/万标</td>
-            <td>9.83%</td>
-            <td>13.065Nm3/万标</td>
-            <td>99.568</td>
-            <td>730.449</td>
-        </tr>
-        <tr>
-            <td>氮气</td>
-            <td>2593.604Nm3/万标</td>
-            <td>9.83%</td>
-            <td>13.065Nm3/万标</td>
-            <td>99.568</td>
-            <td>730.449</td>
-        </tr>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        {#each options.data as d}
+            <tr>
+                {#each options.columns as col}
+                    <td>{d[col.data]}</td>
+                {/each}
+            </tr>
+        {/each}
+        </tbody>
+    </table>
+{/if}
+
 
 <style>
     table {
@@ -61,6 +97,7 @@
         font-size: 14px;
         font-weight: normal;
         text-align: left;
+        white-space: nowrap;
     }
     thead:after {
         content: "";
