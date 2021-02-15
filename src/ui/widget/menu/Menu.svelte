@@ -69,7 +69,7 @@
                         },
                         {
                             key: 702,
-                            title: '权限管理',
+                            title: '角色权限',
                             path: '/auth'
                         }
                     ]

@@ -15,11 +15,11 @@
                 data: "age",
                 width: "10%"
             },
-            {
-                title: "Sex",
-                data: "sex",
-                width: "10%"
-            },
+            // {
+            //     title: "Sex",
+            //     data: "sex",
+            //     width: "10%"
+            // },
             {
                 title: "Address",
                 data: "address",
@@ -31,7 +31,7 @@
                 width: "30%"
             },
             {
-                title: "Phone",
+                title: "角色",
                 data: "phone",
                 width: "10%"
             }
@@ -39,5 +39,5 @@
     }
 </script>
 <div>
-    <DataTable title="数据表" options={dataTableOptions} actionsComponent={Actions} />
+    <DataTable title="用户列表" options={dataTableOptions} actionsComponent={Actions} />
 </div>

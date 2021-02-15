@@ -10,6 +10,7 @@
     import SpiderWebChart from "../../widget/chart/SpiderWebChart.svelte";
     import SimpleTable from "../../widget/table/SimpleTable.svelte";
     import AjaxContent from "../../widget/ajax/AjaxContent.svelte";
+    import XRangeChart from "../../widget/chart/XRangeChart.svelte";
 
     let tree = {
         children: [
@@ -48,6 +49,7 @@
         title: "报表"
     }]
     let activeTabIndex = 0
+    let typeOfVoltage = 1
     $:{
         function getTitle(tree) {
             if (tree.key === activeTreeKey) {
@@ -112,26 +114,71 @@
                     </div>
                 </AjaxContent>
             </div>
-
-            <div>
-                <Board title="电能健康">
-                    <div class="eh" slot="content">
-                        <div class="chart">
-                            <SpiderWebChart/>
-                        </div>
-                        <div>
-                            <div>
-                                <SimpleLineChart/>
+            <Board title="电能健康">
+                <div class="eh-wrapper" slot="content">
+                    <AjaxContent url="http://47.105.46.129:3000/mock/11/api/electricity/health" let:json>
+                        <div class="eh">
+                            <div class="chart">
+                                <SpiderWebChart/>
                             </div>
-                            <div>
-                                <SimpleTable/>
+                            <div class="table">
+                                <div style="height: 30px;margin-bottom: 30px;">
+                                    <SimpleLineChart options={{series: [{data: [2,3,5,8,1,2,4]}]}}/>
+                                </div>
+                                <div>
+                                    <SimpleTable options={{
+                                        columns: [
+                                            {
+                                                label: typeOfVoltage === 1 ? '线电压':'相电压',
+                                                data: 'type'
+                                            },
+                                            {
+                                                label: '平均V',
+                                                data: 'avg'
+                                            },
+                                            {
+                                                label: typeOfVoltage === 1 ? 'UaV' : 'Uab V',
+                                                data: typeOfVoltage === 1 ? 'uav' : 'uabv'
+                                            },
+                                            {
+                                                label: typeOfVoltage === 1 ? 'UbV' : 'Ubc V',
+                                                data: typeOfVoltage === 1 ? 'ubv' : 'ubcv'
+                                            },
+                                            {
+                                                label: typeOfVoltage === 1 ? 'UcV' : 'Uac V',
+                                                data: typeOfVoltage === 1 ? 'ucv' : 'uacv'
+                                            }
+                                        ],
+                                        data: typeOfVoltage === 1 ? [
+                                            {
+                                                type: '最大', avg: json.data.lv.v.max, uav: json.data.lv.uav.max, ubv: json.data.lv.ubv.max, ucv: json.data.lv.ucv.max
+                                            },{
+                                                type: '最小', avg: json.data.lv.v.min, uav: json.data.lv.uav.min, ubv: json.data.lv.ubv.min, ucv: json.data.lv.ucv.min
+                                            },{
+                                                type: '平均', avg: json.data.lv.v.avg, uav: json.data.lv.uav.avg, ubv: json.data.lv.ubv.avg, ucv: json.data.lv.ucv.avg
+                                            }
+                                        ]: [
+                                            {
+                                                type: '最大', avg: json.data.pv.v.max, uabv: json.data.pv.uabv.max, ubcv: json.data.pv.ubcv.max, uacv: json.data.pv.uacv.max
+                                            },{
+                                                type: '最小', avg: json.data.pv.v.min, uabv: json.data.pv.uabv.min, ubcv: json.data.pv.ubcv.min, uacv: json.data.pv.uacv.min
+                                            },{
+                                                type: '平均', avg: json.data.pv.v.avg, uabv: json.data.pv.uabv.avg, ubcv: json.data.pv.ubcv.avg, uacv: json.data.pv.uacv.avg
+                                            }
+                                        ]
+                                    }}/>
+                                </div>
                             </div>
                         </div>
+                    </AjaxContent>
+                </div>
+            </Board>
+            <div class="board-3">
+                <Board title="峰谷平用电分析">
+                    <div class="cost-analysis" slot="content">
+                        <XRangeChart />
                     </div>
                 </Board>
-            </div>
-            <div>
-                <Board title="峰谷平用电分析"/>
             </div>
         </div>
     </div>
@@ -174,7 +221,11 @@
         display: grid;
         grid-gap: 16px;
         grid-template-columns: 2fr 2fr 4fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 1fr min-content;
+    }
+
+    .board-3 {
+        grid-area: 2/1/3/4;
     }
 
     .kpi {
@@ -184,6 +235,8 @@
         grid-gap: 16px;
         font-size: 13px;
     }
+
+
 
     /* kpi item */
     .ki {
@@ -205,10 +258,18 @@
         display: flex;
     }
 
+    .eh-wrapper {
+        display: flex;
+        height: 100%;
+    }
+
     /* electricity health */
     .eh {
-        padding: 16px;
         display: flex;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 16px;
+        align-items: center;
     }
 
     .unit {
@@ -216,5 +277,19 @@
         font-size: 12px;
         font-weight: normal;
         margin-left: 4px;
+    }
+
+    .eh > .chart {
+        width: 200px;
+        height: 300px;
+    }
+
+    .eh > .table {
+        margin-left: 32px;
+        flex-grow: 1;
+    }
+
+    .cost-analysis {
+        padding: 16px;
     }
 </style>

@@ -98,6 +98,7 @@
         font-weight: normal;
         text-align: left;
         white-space: nowrap;
+        color: var(--ring-secondary-color);
     }
     thead:after {
         content: "";
@@ -112,5 +113,6 @@
     td {
         font-size: 13px;
         height: 32px;
+        color: var(--ring-text-color);
     }
 </style>

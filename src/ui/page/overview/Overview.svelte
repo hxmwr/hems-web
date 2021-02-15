@@ -14,7 +14,7 @@
     <div class="board-0">
         <Board title="主要指标">
             <div class="kpi" slot="content">
-                <AjaxContent delay={500} url={url} let:json>
+                <AjaxContent url={url} let:json>
                     {#each json.data.metrics as metric}
                         <KPI data={metric}/>
                     {/each}

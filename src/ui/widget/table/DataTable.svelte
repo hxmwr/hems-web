@@ -1,5 +1,7 @@
 <script>
     import Pagination from "./Pagination.svelte";
+    import RingLoader from "../spinner/RingLoader.svelte";
+    import {fade} from 'svelte/transition'
 
     export let options
     export let title = "数据表"
@@ -93,6 +95,13 @@
                 <Pagination bind:page={page} total={total}/>
             </div>
         {/if}
+        {#if loading}
+            <div class="mask" out:fade>
+                <div class="loader">
+                    <RingLoader />&nbsp;&nbsp;<span class="loading">Loading...</span>
+                </div>
+            </div>
+        {/if}
     </div>
 </div>
 
@@ -167,6 +176,7 @@
         border-left-width: 0;
         border-bottom-width: 0;
         font-size: 14px;
+        color: var(--ring-text-color);
     }
 
     td:last-child {
@@ -182,7 +192,6 @@
 
     .top-bar {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         margin: 24px 0 21px;
     }
@@ -211,13 +220,20 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background-color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(255, 255, 255, 0.1);
     }
 
     .loader {
-        position: fixed;
-        border-radius: 8px;
-        margin-left: -12px;
-        margin-top: -12px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+    }
+
+    .loading {
+        font-size: 13px;
+        color: var(--ring-secondary-color);
     }
 </style>

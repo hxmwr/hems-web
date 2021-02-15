@@ -22,6 +22,12 @@
 </Card>
 
 <style>
+    .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
     .title-bar {
         height: 32px;
         position: relative;
@@ -57,6 +63,7 @@
 
     .content {
         position: relative;
+        flex-grow: 1;
     }
 
     .content::before {

@@ -25,7 +25,7 @@
 
 </script>
 {#await promise}
-    <RingLoaderWithMask/>
+    <RingLoaderWithMask />
 {:then json}
     <slot json={json}>
     </slot>
