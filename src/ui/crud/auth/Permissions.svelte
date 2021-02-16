@@ -1,0 +1,1 @@
+<span>{Math.ceil(Math.random() * 10)}</span>

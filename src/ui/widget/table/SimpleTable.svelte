@@ -3,6 +3,7 @@
         key: "_key",
         selectable: false,
         ajax: null,
+        fullWidth: false,
         columns: [
             {
                 label: "名称",
@@ -70,11 +71,11 @@
 </script>
 
 {#if options}
-    <table>
+    <table class:full-width={options.fullWidth}>
         <thead>
         <tr>
             {#if options.selectable && options.key}
-                <th>
+                <th class="col-checkbox">
                     <label class="checkbox" data-test="ring-checkbox">
                         <input type="checkbox" class="input" bind:checked={selectAll}
                                on:click={() => actionCheckAll = true}>
@@ -93,7 +94,9 @@
             {/if}
             {#each options.columns as col}
                 {#if typeof(col.label) === "function"}
-                    <th style={"width:" + (col.width ? col.width: "auto")}>{@html col.render(col)}</th>
+                    <th style={"width:" + (col.width ? col.width: "auto")}>
+                        <svelte:component this={col.label} />
+                    </th>
                 {:else}
                     <th style={"width:" + (col.width ? col.width: "auto")}>{col.label}</th>
                 {/if}
@@ -123,8 +126,8 @@
                 {/if}
                 {#each options.columns as col}
                     <td>
-                        {#if col.render}
-                            {@html col.render(data, d)}
+                        {#if typeof(col.render) === 'function'}
+                            <svelte:component this={col.render} data={data} row={d} />
                         {:else}
                             {d[col.data]}
                         {/if}
@@ -135,7 +138,6 @@
         </tbody>
     </table>
 {/if}
-
 
 <style>
     table {
@@ -215,5 +217,14 @@
     .input:checked + .cell .icon-check {
         transform: translateY(8px);
         opacity: 1;
+    }
+
+    .full-width th:first-child,
+    .full-width td:first-child {
+        padding-left: 16px;
+    }
+    .col-checkbox {
+        width: 1%;
+        padding-right: 8px;
     }
 </style>

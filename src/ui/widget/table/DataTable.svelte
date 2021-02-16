@@ -42,10 +42,10 @@
 
 <div class="container">
     <div class="top-bar">
-        <div class="title-bar">{title}</div>
-        <div class="op-group">
-            <svelte:component this={actionsComponent}/>
-        </div>
+        <div class="title">{title}</div>
+    </div>
+    <div class="toolbar">
+        <svelte:component this={actionsComponent}/>
     </div>
     <div class="dt-wrapper">
         <div class="menu-bar">
@@ -115,6 +115,10 @@
         position: relative;
     }
 
+    .toolbar {
+        padding: 16px 0;
+    }
+
     /* progress bar */
     .dt-pb {
         position: absolute;
@@ -147,12 +151,14 @@
         border: 1px solid #e9ecef;
         border-collapse: separate !important;
         border-spacing: 0;
+        border-left: none;
+        border-right: none;
     }
 
     th {
-        border: 1px solid #e9ecef;
         border-left-width: 0;
-        border-bottom: 2px solid #e9ecef;
+        border: none;
+        border-bottom: 1px solid #e9ecef;
         padding: 0.5rem;
         text-align: left;
         font-size: 14px;
@@ -162,21 +168,17 @@
         border-right-width: 0;
     }
 
-    tbody > tr:nth-of-type(odd) {
-        background: rgba(0, 0, 0, 0.03);
-    }
-
     tbody > tr:hover {
-        background: #e0f3ff;
+        background: var(--ring-hover-background-color);
     }
 
     td {
         padding: 0.55rem;
-        border: 1px solid #e9ecef;
         border-left-width: 0;
         border-bottom-width: 0;
         font-size: 14px;
         color: var(--ring-text-color);
+        border: none;
     }
 
     td:last-child {
@@ -191,17 +193,11 @@
     }
 
     .top-bar {
-        display: flex;
-        align-items: center;
-        margin: 24px 0 21px;
+        margin: 24px 0 16px;
     }
 
-    .top-bar > .title-bar {
+    .top-bar > .title {
         font-size: 27px;
-    }
-
-    .top-bar > .op-group {
-        font-size: 14px;
     }
 
     .menu-bar {

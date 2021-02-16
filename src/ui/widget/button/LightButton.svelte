@@ -20,7 +20,7 @@
         font-size: var(--ring-font-size-smaller);
         line-height: 24px;
         cursor: pointer;
-        border-radius: 0;
+        border-radius: var(--ring-border-radius);
         margin: 0;
     }
 
