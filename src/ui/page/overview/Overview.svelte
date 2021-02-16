@@ -8,6 +8,73 @@
     import CostChart from "./CostChart.svelte";
 
     let url = "http://47.105.46.129:3000/mock/11/api/overview"
+    let energyTableOpts = {
+        key: "_key",
+        columns: [
+            {
+                label: "名称",
+                data: "name"
+            },
+            {
+                label: "单耗",
+                data: "uc"
+            },
+            {
+                label: "环比",
+                data: "change"
+            },
+            {
+                label: "日累计流量",
+                data: "apd"
+            },
+            {
+                label: "月累计流量",
+                data: "apm"
+            },
+            {
+                label: "年累计流量",
+                data: "apy"
+            }
+        ]
+    }
+    let energyTableData = [
+        {
+            _key: 1,
+            name: "燃料气",
+            uc: "134.638Nm3/万标",
+            change: "-0.46%",
+            apd: "0.96Nm3/万标",
+            apm: "5.772",
+            apy: "49.029"
+        },
+        {
+            _key: 2,
+            name: "电",
+            uc: "2593.604Nm3/万标",
+            change: "9.83%",
+            apd: "13.065Nm3/万标",
+            apm: "99.568",
+            apy: "730.449"
+        },
+        {
+            _key: 3,
+            name: "冷却水",
+            uc: "2593.604Nm3/万标",
+            change: "9.83%",
+            apd: "13.065Nm3/万标",
+            apm: "99.568",
+            apy: "730.449"
+        },
+        {
+            _key: 4,
+            name: "氮气",
+            uc: "2593.604Nm3/万标",
+            change: "9.83%",
+            apd: "13.065Nm3/万标",
+            apm: "99.568",
+            apy: "730.449"
+        }
+    ]
 </script>
 
 <div class="container">
@@ -40,7 +107,7 @@
     <Board title=能耗情况>
         <div class="energy" slot="content">
             <div class="table">
-                <SimpleTable />
+                <SimpleTable options={energyTableOpts} data={energyTableData} />
             </div>
             <div class="chart">
                 <CostChart />
@@ -49,7 +116,7 @@
     </Board>
     <Board title="生产情况">
         <div class="production" slot="content">
-            <SimpleTable />
+            <SimpleTable options={energyTableOpts} data={energyTableData} />
         </div>
     </Board>
 </div>

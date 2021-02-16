@@ -15,11 +15,6 @@
                 data: "age",
                 width: "10%"
             },
-            // {
-            //     title: "Sex",
-            //     data: "sex",
-            //     width: "10%"
-            // },
             {
                 title: "Address",
                 data: "address",

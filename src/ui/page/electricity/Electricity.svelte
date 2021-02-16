@@ -148,8 +148,8 @@
                                                 label: typeOfVoltage === 1 ? 'UcV' : 'Uac V',
                                                 data: typeOfVoltage === 1 ? 'ucv' : 'uacv'
                                             }
-                                        ],
-                                        data: typeOfVoltage === 1 ? [
+                                        ]
+                                    }} data={typeOfVoltage === 1 ? [
                                             {
                                                 type: '最大', avg: json.data.lv.v.max, uav: json.data.lv.uav.max, ubv: json.data.lv.ubv.max, ucv: json.data.lv.ucv.max
                                             },{
@@ -165,8 +165,7 @@
                                             },{
                                                 type: '平均', avg: json.data.pv.v.avg, uabv: json.data.pv.uabv.avg, ubcv: json.data.pv.ubcv.avg, uacv: json.data.pv.uacv.avg
                                             }
-                                        ]
-                                    }}/>
+                                        ]}/>
                                 </div>
                             </div>
                         </div>

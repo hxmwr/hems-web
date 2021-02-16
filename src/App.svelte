@@ -3,6 +3,7 @@
     import User from "./ui/crud/user/User.svelte";
     import Overview from "./ui/page/overview/Overview.svelte"
     import Electricity from "./ui/page/electricity/Electricity.svelte"
+    import Auth from "./ui/crud/auth/Auth.svelte"
     import {Route, Router} from "./lib/routing"
 
     let iconFont = "font/iconfont.css"
@@ -34,6 +35,7 @@
                     <Route path="/user" component={User}/>
                     <Route path="/overview" component={Overview}/>
                     <Route path="/electricity" component={Electricity} />
+                    <Route path="/auth" component={Auth} />
                 </div>
                 <div class="footer">
                 </div>
