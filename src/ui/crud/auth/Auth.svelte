@@ -3,6 +3,7 @@
     import RoleNameDesc from "./RoleNameDesc.svelte"
     import Permissions from "./Permissions.svelte"
     import PrimaryBtn from "../../widget/button/PrimaryBtn.svelte";
+    import LightButton from "../../widget/button/LightButton.svelte";
 
     let options = {
         selectable: true,
@@ -27,6 +28,8 @@
             }
         ]
     }
+    let selectedRows = {}
+    let focusedRow = null
 </script>
 
 
@@ -36,9 +39,12 @@
     </div>
     <div class="toolbar">
         <PrimaryBtn>新建角色</PrimaryBtn>
+        {#if Object.values(selectedRows).filter(v => v).length > 0 || focusedRow != null}
+            <LightButton clazz="danger">删除</LightButton>
+        {/if}
     </div>
     <div style="margin: 0 -16px;">
-        <SimpleTable options={options} />
+        <SimpleTable options={options} bind:selectedRows={selectedRows} bind:focusedRow={focusedRow}/>
     </div>
 </div>
 
@@ -47,6 +53,7 @@
         font-size: 24px;
         margin-bottom: 16px;
     }
+
     .toolbar {
         padding: 16px 0;
     }

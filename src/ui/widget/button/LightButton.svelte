@@ -1,9 +1,10 @@
 <script>
     export let active = false
     export let clickHandler = () => {}
+    export let clazz = "light"
 </script>
 
-<button class="light" class:active={active} on:click={clickHandler}>
+<button class={clazz} class:active={active} on:click={clickHandler}>
     <slot>
     </slot>
 </button>
@@ -22,20 +23,37 @@
         cursor: pointer;
         border-radius: var(--ring-border-radius);
         margin: 0;
-    }
-
-    .light {
-        color: var(--ring-text-color);
         background-color: var(--ring-content-background-color);
         box-shadow: inset 0 0 0 1px var(--ring-borders-color);
     }
-    .light:hover {
+
+    button:hover {
         z-index: 2;
+    }
+    button:active {
+        z-index: 2;
+    }
+
+
+    .light {
+        color: var(--ring-text-color);
+    }
+    .light:hover {
         box-shadow: inset 0 0 0 1px var(--ring-border-hover-color);
     }
     .light:active, .light.active {
-        z-index: 2;
         background-color: var(--ring-selected-background-color);
         box-shadow: inset 0 0 0 1px var(--ring-border-hover-color);
+    }
+
+    .danger {
+        color: var(--ring-error-color);
+    }
+    .danger:hover {
+        box-shadow: inset 0 0 0 1px var(--ring-button-danger-hover-color);
+    }
+    .danger:active, .danger.active {
+        background-color: var(--ring-button-danger-active-color);
+        box-shadow: inset 0 0 0 1px var(--ring-button-danger-hover-color);
     }
 </style>

@@ -32,9 +32,10 @@
         ]
     }
     export let data = []
+    export let selectedRows = {}
+    export let focusedRow = null
 
     let selectAll = false
-    let selectedRows = {}
     let actionCheckAll = false
     $: if (selectAll && actionCheckAll) {
         data.forEach(d => {
@@ -43,6 +44,7 @@
     } else {
         if (Object.values(selectedRows).filter(v => v).length === data.length && data.length > 0) {
             if (actionCheckAll) {
+                focusedRow = null
                 for (let x in selectedRows) {
                     selectedRows[x] = false
                 }
@@ -93,9 +95,9 @@
                 </th>
             {/if}
             {#each options.columns as col}
-                {#if typeof(col.label) === "function"}
+                {#if typeof (col.label) === "function"}
                     <th style={"width:" + (col.width ? col.width: "auto")}>
-                        <svelte:component this={col.label} />
+                        <svelte:component this={col.label}/>
                     </th>
                 {:else}
                     <th style={"width:" + (col.width ? col.width: "auto")}>{col.label}</th>
@@ -105,7 +107,12 @@
         </thead>
         <tbody>
         {#each data as d, i}
-            <tr id={"row_" + (d[options.key]?d[options.key]:i)}>
+            <tr
+                    on:click={() => {focusedRow = d[options.key]}}
+                    id={"row_" + (d[options.key]?d[options.key]:i)}
+                    class:selected={options.selectable?(selectedRows[d[options.key]]):false}
+                    class:focused={options.selectable?(focusedRow === d[options.key]):false}
+            >
                 {#if options.selectable}
                     <td class="col-checkbox">
                         <label class="checkbox" data-test="ring-checkbox">
@@ -126,8 +133,8 @@
                 {/if}
                 {#each options.columns as col}
                     <td>
-                        {#if typeof(col.render) === 'function'}
-                            <svelte:component this={col.render} data={data} row={d} />
+                        {#if typeof (col.render) === 'function'}
+                            <svelte:component this={col.render} data={data} row={d}/>
                         {:else}
                             {d[col.data]}
                         {/if}
@@ -223,8 +230,18 @@
     .full-width td:first-child {
         padding-left: 16px;
     }
+
     .col-checkbox {
         width: 1%;
         padding-right: 8px;
     }
+
+    .selected {
+        background-color: var(--ring-selected-background-color);
+    }
+
+    .focused {
+        background-color: var(--ring-hover-background-color);
+    }
+
 </style>
