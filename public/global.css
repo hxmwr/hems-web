@@ -205,3 +205,8 @@ button:focus {
 	/* Alerts should de displayed above overlays */
 	--ring-alert-z-index: 6;
 }
+
+:root {
+	--chart-bar-color: #25b7ff;
+	--chart-line-color: #fd8d3c;
+}

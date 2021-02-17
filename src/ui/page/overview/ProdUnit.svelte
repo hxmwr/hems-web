@@ -70,14 +70,14 @@
     .indicator > .value {
         height: 100%;
         border-radius: 4px;
-        background: var(--ring-main-color);
+        background: var(--chart-bar-color);
     }
     .indicator > .target-value {
         position: absolute;
         height: 50px;
         top: -10px;
         width: 2px;
-        background: #E30000;
+        background: var(--chart-line-color);
     }
     .main {
         font-size: 26px;

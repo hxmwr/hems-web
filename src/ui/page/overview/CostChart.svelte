@@ -1,6 +1,7 @@
 <script>
     import Highcharts from "highcharts"
     import {onMount} from "svelte";
+    import {colors} from "../../../res/values"
 
     let chart
 
@@ -40,6 +41,9 @@
                     showInLegend: true
                 }
             },
+            colors: [
+                colors.blue, colors.brown, colors.green, "#000000"
+            ],
             series: [{
                 type: 'pie',
                 name: '成本占比',

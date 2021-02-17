@@ -19,6 +19,7 @@
 <style>
     .btn-grp > :global(button) {
         margin-left: -1px;
+        border-radius: 0;
     }
 
     .btn-grp > :global(button:first-child) {

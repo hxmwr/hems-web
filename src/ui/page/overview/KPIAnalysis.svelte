@@ -62,7 +62,7 @@
             plotOptions: {
                 series: {
                     animation: false,
-                    lineWidth: 2,
+                    lineWidth: 1,
                     shadow: false,
                     states: {
                         hover: {
@@ -70,6 +70,7 @@
                         }
                     },
                     marker: {
+                        enabled: false,
                         radius: 1,
                         states: {
                             hover: {
@@ -86,7 +87,7 @@
             },
             series: [
                 {
-                    color: colors.main,
+                    color: colors.blue,
                     data: Array(100).fill(0).map(() => Math.random()),
                     pointStart: 1
                 }

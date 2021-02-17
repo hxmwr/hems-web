@@ -13,7 +13,7 @@
         <div class="metric">
             {data.metric}
         </div>
-        <div class="rate">
+        <div class="rate" class:negative={data.rate < 0} class:positive={data.rate > 0}>
             {data.rate}
         </div>
     </div>
@@ -21,7 +21,7 @@
         <span class="number">{data.total}</span><span class="unit">{data.unit}</span>
     </div>
     <div class="r3">
-        <SimpleLineChart options={{series: [{data: data.data, pointStart: 1, color: colors.main}]}} />
+        <SimpleLineChart options={{series: [{marker: {enabled: false},data: data.data, pointStart: 1, color: colors.blue}]}} />
     </div>
 </div>
 
@@ -33,7 +33,7 @@
          display: flex;
          flex-direction: column;
          justify-content: space-between;
-         height: 110px;
+         height: 85px;
      }
 
      .container:last-child {
@@ -47,13 +47,16 @@
         height: 24px;
     }
     .r3 {
-        height: 50px;
+        margin-top: 4px;
+        height: 20px;
         box-sizing: border-box;
-        padding: 8px 0;
         overflow: visible;
     }
     .r2 {
         font-size: 22px;
+        line-height: 30px;
+        display: block;
+        font-weight: bold;
     }
     .r2 > .number {
         line-height: 1;
@@ -63,20 +66,25 @@
     .r2 > .unit {
         font-size: 14px;
         align-self: flex-end;
-        color: #808080;
     }
     .title-bar {
-        font-size: 16px;
-        color: grey;
+        font-size: 14px;
+        color: var(--ring-text-color);
         margin-right: 4px;
     }
     .metric {
-        font-size:16px;
-        color: grey;
+        font-size:14px;
+        color: var(--ring-text-color);
         margin-right: 4px;
     }
     .rate {
-        font-size: 16px;
+        font-size: 13px;
         margin-right: 4px;
+    }
+    .rate.positive {
+        color: #76a800;
+    }
+    .rate.negative {
+        color: red;
     }
 </style>

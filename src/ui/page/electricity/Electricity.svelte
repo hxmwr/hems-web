@@ -103,7 +103,7 @@
                                 <div class="ki" slot="content">
                                     <div class="kiv"><span>{d.value}</span><span class="unit">{d.unit}</span></div>
                                     <div class="kic">
-                                        <SimpleLineChart options={{series: [{data: d.data,color: colors.main}]}}/>
+                                        <SimpleLineChart options={{series: [{data: d.data,color: colors.bar}]}}/>
                                     </div>
                                 </div>
                                 <div slot="actions">

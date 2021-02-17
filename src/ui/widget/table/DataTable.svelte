@@ -8,7 +8,7 @@
     export let actionsComponent = null
 
     let data = []
-    let limit = "1"
+    let limit = 50
     let page = 1
     let total = 1
     let loading = true
@@ -48,19 +48,6 @@
         <svelte:component this={actionsComponent}/>
     </div>
     <div class="dt-wrapper">
-        <div class="menu-bar">
-            <div class="pg-size">
-                显示
-                <select bind:value={limit}>
-                    <option value="1">10</option>
-                    <option value="2">20</option>
-                    <option value="3">30</option>
-                    <option value="4">50</option>
-                    <option value="5">100</option>
-                </select>
-                条记录
-            </div>
-        </div>
         <div class="dt-wrapper">
             <table class="dt">
                 <thead class="dt-h">
@@ -92,7 +79,7 @@
         </div>
         {#if data.length > 0}
             <div class="pagination">
-                <Pagination bind:page={page} total={total}/>
+                <Pagination bind:page={page} total={total} bind:limit={limit}/>
             </div>
         {/if}
         {#if loading}
@@ -117,27 +104,6 @@
 
     .toolbar {
         padding: 16px 0;
-    }
-
-    /* progress bar */
-    .dt-pb {
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        background: #0095ff;
-        transform: translate3d(0%, 0px, 0px);
-        transition: all 0ms ease 0s;
-        display: none;
-    }
-
-    .menu-bar {
-        margin: 8px 0;
-        font-size: 12px;
-    }
-
-    .pg-size {
-        display: flex;
-        align-items: center;
     }
 
     .pg-size > select {
@@ -198,12 +164,6 @@
 
     .top-bar > .title {
         font-size: 27px;
-    }
-
-    .menu-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
     }
 
     .pagination {

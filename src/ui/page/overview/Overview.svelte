@@ -156,7 +156,7 @@
     }
 
     .board-0 {
-        height: 176px;
+        height: 152px;
     }
 
     .board-1 {

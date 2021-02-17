@@ -1,6 +1,7 @@
 <script>
     export let total = 1
     export let page = 1
+    export let limit = 50
 
     let jumpToPage = total
     $: model = (() => {
@@ -71,6 +72,10 @@
     {/if}
     <div class="item next" class:disabled={model.page >= model.total} on:click={() => gotoPage(model.page + 1)}>下一页<span class="iconfont icon-xiayige"></span></div>
     <div class="jump">共{model.total}页，到第<input on:keypress={e => {if (e.keyCode === 13) gotoPage(jumpToPage)}} type="number" min="1" max={model.total} bind:value={jumpToPage} />页<button on:click={() => gotoPage(jumpToPage)}>确定</button></div>
+    <div on:click={() => {limit = 15}} class="item ps first" class:current={limit===15}>15</div>
+    <div on:click={() => {limit = 30}} class="item ps" class:current={limit===30}>30</div>
+    <div on:click={() => {limit = 50}} class="item ps" class:current={limit===50}>50</div>
+    <span>每页</span>
 </div>
 
 <style>
@@ -78,11 +83,12 @@
         display: flex;
         font-size: 14px;
         user-select: none;
+        align-items: center;
     }
     .pg > .item {
-        width: 35px;
-        height: 35px;
-        margin-left: -1px;
+        width: 25px;
+        height: 25px;
+        border-radius: 3px;
         border: 1px solid #ededed;
         display: flex;
         align-items: center;
@@ -90,6 +96,9 @@
         white-space: nowrap;
         color: #3d3d3d;
         cursor: pointer;
+        font-size: 13px;
+        margin-right: 4px;
+        line-height: 1;
     }
     .pg > .prev,
     .pg > .next {
@@ -106,7 +115,6 @@
         margin-right: 6px;
     }
     .pg > .next {
-        margin-left: 5px;
         margin-right: 5px;
     }
     .pg > .dot {
@@ -116,10 +124,9 @@
     }
     .pg > .item.current {
         cursor: default;
-        background: #1bbc9c;
-        border-color: #1bbc9c;
+        background: var(--ring-selected-background-color);
+        border-color: var(--ring-border-hover-color);
         z-index: 1;
-        color: #fff;
     }
 
     .pg > .item.disabled {
@@ -128,7 +135,7 @@
     }
 
     .pg > .item:not(.current, .disabled):hover {
-        border-color: #1bbc9c;
+        border-color: var(--ring-border-hover-color);
         z-index: 1;
     }
 
@@ -148,5 +155,8 @@
         padding: 0 4px;
         font-size: 12px;
         margin-left: 5px;
+    }
+    .ps.first {
+        margin-left: auto;
     }
 </style>
