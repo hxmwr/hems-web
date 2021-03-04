@@ -4,12 +4,13 @@
     import Permissions from "./Permissions.svelte"
     import PrimaryBtn from "../../widget/button/PrimaryBtn.svelte";
     import LightButton from "../../widget/button/LightButton.svelte";
+    import {Urls} from "../../../api";
 
     let options = {
         selectable: true,
         fullWidth: true,
         ajax: {
-            url: "http://47.105.46.129:3000/mock/11/api/auth/roles",
+            url: Urls.get('auth_roles'),
             parse: json => json.data.rows
         },
         key: "key",

@@ -50,7 +50,7 @@
                 },
                 {
                     key: 6,
-                    title: '环境与排放监测',
+                    title: '环境检测',
                     path: '/',
                     icon: 'icon-kucunguanli',
                     isExpanded: false,

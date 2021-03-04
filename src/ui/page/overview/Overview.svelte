@@ -6,8 +6,8 @@
     import ProdUnit from "./ProdUnit.svelte";
     import SimpleTable from "../../widget/table/SimpleTable.svelte";
     import CostChart from "./CostChart.svelte";
+    import {Urls} from "../../../api";
 
-    let url = "http://47.105.46.129:3000/mock/11/api/overview"
     let energyTableOpts = {
         key: "_key",
         columns: [
@@ -81,7 +81,7 @@
     <div class="board-0">
         <Board title="主要指标">
             <div class="kpi" slot="content">
-                <AjaxContent url={url} let:json>
+                <AjaxContent url={Urls.get('overview')} let:json>
                     {#each json.data.metrics as metric}
                         <KPI data={metric}/>
                     {/each}

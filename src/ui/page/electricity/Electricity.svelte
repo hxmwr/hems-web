@@ -11,6 +11,7 @@
     import SimpleTable from "../../widget/table/SimpleTable.svelte";
     import AjaxContent from "../../widget/ajax/AjaxContent.svelte";
     import XRangeChart from "../../widget/chart/XRangeChart.svelte";
+    import {Urls} from "../../../api";
 
     let tree = {
         children: [
@@ -85,7 +86,6 @@
                 <div style="margin-left: 16px;">
                     <Datepicker/>
                 </div>
-
             </div>
         </div>
         <div class="tabs">
@@ -96,7 +96,7 @@
                 <Board title="有功电量"/>
             </div>
             <div style="width: 352px;height: 392px;" class="with-loader">
-                <AjaxContent url="http://47.105.46.129:3000/mock/11/api/electricity/kpi" let:json>
+                <AjaxContent url={Urls.get('electricity_kpi')} let:json>
                     <div class="kpi" {json}>
                         {#each json.data as d}
                             <Board title={d.item}>
@@ -116,7 +116,7 @@
             </div>
             <Board title="电能健康">
                 <div class="eh-wrapper" slot="content">
-                    <AjaxContent url="http://47.105.46.129:3000/mock/11/api/electricity/health" let:json>
+                    <AjaxContent url={Urls.get('electricity_health')} let:json>
                         <div class="eh">
                             <div class="chart">
                                 <SpiderWebChart/>

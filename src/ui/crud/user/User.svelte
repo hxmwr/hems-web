@@ -1,9 +1,10 @@
 <script>
     import DataTable from "../../widget/table/DataTable.svelte";
     import Actions from "./Actions.svelte"
+    import {Urls} from "../../../api";
 
     let dataTableOptions = {
-        ajax: 'http://47.105.46.129:3000/mock/11/api/users',
+        ajax: Urls.get('users'),
         columns: [
             {
                 title: "Name",
